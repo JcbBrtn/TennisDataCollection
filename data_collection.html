@@ -12,14 +12,104 @@
         <script src="data_control.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container mt-3">
             <h3>Please Enter Each Player's Name.</h3>
-            <div class="row justify-content-start">
-                <div class="col-3">
+            <div class="row mb-3">
+                <div class="col-sm-3 mb-2">
                     <input type="text" id="Player1" value="Player 1" onblur="Update_Player1_Label()"/>
                 </div>
-                <div class="col-3">
+                <div class="col-sm-3">
                     <input type="text" id="Player2" value="Player 2" onblur="Update_Player2_Label()"/>
+                </div>
+            </div>
+            <hr>
+            <h3>Point Information</h3>
+            <div class="row justify-content-start mb-3">
+                <div class="col-sm-2 mb-3">
+                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                        <div class="card-body">
+                            <h6>Point Ended By</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio" checked>
+                                <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
+                                Player 1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="Player2_Radio">
+                                <label class="form-check-label" for="Player2_Radio" id="Player2_Label">
+                                Player 2
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 14rem;"> <!-- Second card in the row-->
+                        <div class="card-body">
+                            <h6>Shot Count</h6>
+                            <input type="number" id="Shot_Count" min="1" value="1"/>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Input row-->
+            <div class="row justify-content-start mb-3">
+                <div class="col-sm-2 mb-3">
+                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                        <div class="card-body">
+                            <h6>Side Shot was hit</h6>
+                            <select class="form-select" id="Side">
+                                <option label="Serve">Serve</option>
+                                <option label="Forehand">Forehand</option>
+                                <option label="Backhand">Backhand</option> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 14rem;"> <!-- Second card in the row-->
+                        <div class="card-body">
+                            <h6>Shot Type</h6>
+                            <select class="form-select" id="Shot">
+                                <option label="Drive">Drive</option>
+                                <option label="Volley">Volley</option>
+                                <option label="Lob">Lob</option>
+                                <option label="Overhead">Overhead</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Input row-->
+            <div class="row justify-content-start mb-3">
+                <div class="col-sm-2 mb-3">
+                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                        <div class="card-body">
+                            <h6>How the shot missed</h6>
+                            <select class="form-select" id="Place">
+                                <option value="" label="None">N/A</option>
+                                <option label="Long">Long</option>
+                                <option label="Wide">Wide</option>
+                                <option label="Net">Net</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 14rem;"> <!-- Second card in the row-->
+                        <div class="card-body">
+                            <h6>How the point ended</h6>
+                            <select class="form-select" id="Type">
+                                <option label="Winner">Winner</option>
+                                <option label="Unforced Error">Unforced Error</option>
+                                <option label="Forced Error">Forced Error</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Input row-->
+            <div class="row mb-3">
+                <div class="col-sm-6 ">
+                    <button class="btn btn-light" id="Submit_Btn" type="button" onclick="Add_Point_Data()">Add Point</button>
                 </div>
             </div>
             <div class="row">
@@ -33,61 +123,10 @@
                             <th scope="col">Shot Type</th>
                             <th scope="col">Miss Place</th>
                             <th scope="col">End Type</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th> 
-                                <button id="Submit_Btn" type="button" onclick="Add_Point_Data()">Add Point</button>
-                            </th>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio" checked>
-                                    <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
-                                    Player 1
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadio" id="Player2_Radio">
-                                    <label class="form-check-label" for="Player2_Radio" id="Player2_Label">
-                                    Player 2
-                                    </label>
-                                </div>
-                            </td>
-                            <td>
-                                <input class="col-xs-2" type="number" id="Shot_Count" min="1"/>
-                            </td>
-                            <td>
-                                <select id="Side">
-                                    <option label="Forehand">Forehand</option>
-                                    <option label="Backhand">Backhand</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select id="Shot">
-                                    <option label="Drive">Drive</option>
-                                    <option label="Volley">Volley</option>
-                                    <option label="Lob">Lob</option>
-                                    <option label="Overhead">Overhead</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select id="Place">
-                                    <option value="" label="None">N/A</option>
-                                    <option label="Long">Long</option>
-                                    <option label="Wide">Wide</option>
-                                    <option label="Net">Net</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select id="Type">
-                                    <option label="Winner">Winner</option>
-                                    <option label="Unforced Error">Unforced Error</option>
-                                    <option label="Forced Error">Forced Error</option>
-                                </select>
-                            </td>
-                        </tr>
+                        <!-- This is where the point data will go. -->
                     </tbody>
                 </table>
             </div>

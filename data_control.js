@@ -18,7 +18,7 @@ function Focus_On_Submit_Button(){
 
 function Add_Point_Data() {
     var table = document.getElementById("match_data");
-    var row = table.insertRow(2);
+    var row = table.insertRow(1);
 
     //create the new row's columns
     var Point_Number = row.insertCell(0);
