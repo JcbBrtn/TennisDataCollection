@@ -9,134 +9,87 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
+        <script src="data_control.js"></script>
     </head>
     <body>
         <div class="container">
-            <table>
-                <tc>
-                    <input type="text" id="Player1"\>
-                    <input type="text" id="Player2"\>
-                </tc>
-                <tc>
-                    <tr>
-                        <input type="number" id="Shot_Count" min="1"/>
-                    </tr>
-                    <tr>
-                        <select id="Side">
-                            <option label="Forehand">Forehand</option>
-                            <option label="Backhand">Backhand</option>
-                        </select>
-                    </tr>
-                    <tr>
-                        <select id="Shot">
-                            <option label="Drive">Drive</option>
-                            <option label="Volley">Volley</option>
-                            <option label="Lob">Lob</option>
-                            <option label="Overhead">Overhead</option>
-                        </select>
-                    </tr>
-                    <tr>
-                        <select id="Place">
-                            <option value="" label="None">N/A</option>
-                            <option label="Long">Long</option>
-                            <option label="Wide">Wide</option>
-                            <option label="Net">Net</option>
-                        </select>
-                    </tr>
-                    <tr>
-                        <select id="Type">
-                            <option label="Winner">Winner</option>
-                            <option label="Unforced Error">Unforced Error</option>
-                            <option label="Forced Error">Forced Error</option>
-                        </select>
-                    </tr>
-                    <tr>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio" checked>
-                            <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
-                              Player 1
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadio" id="Player2_Radio">
-                            <label class="form-check-label" for="Player2_Radio" id="Player2_Label">
-                              Player 2
-                            </label>
-                          </div>
-                    </tr>
-                </tc>
-            </table>
-
-            <button type="button" onclick="Add_Point_Data()">Add Point</button>
-
-            <table id="match_data" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Point Number</th>
-                        <th scope="col">Shot Count</th>
-                        <th scope="col">Side</th>
-                        <th scope="col">Shot Type</th>
-                        <th scope="col">Miss Place</th>
-                        <th scope="col">End Type</th>
-                        <th scope="col">Ended By</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-
+            <div class="row">
+                <div class="col">
+                    <input class="col-xs-3" type="text" id="Player1" value="Player 1" onblur="Update_Player1_Label()"/>
+                </div>
+                <div class="col">
+                    <input class="col-xs-3" type="text" id="Player2" value="Player 2" onblur="Update_Player2_Label()"/>
+                </div>
+            </div>
+            <div class="row">
+                <table id="match_data" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Point Number</th>
+                            <th scope="col">Ended By</th>
+                            <th scope="col">Shot Count</th>
+                            <th scope="col">Side</th>
+                            <th scope="col">Shot Type</th>
+                            <th scope="col">Miss Place</th>
+                            <th scope="col">End Type</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th> 
+                                <button id="Submit_Btn" type="button" onclick="Add_Point_Data()">Add Point</button>
+                            </th>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio" checked>
+                                    <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
+                                    Player 1
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadio" id="Player2_Radio">
+                                    <label class="form-check-label" for="Player2_Radio" id="Player2_Label">
+                                    Player 2
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="col-xs-2" type="number" id="Shot_Count" min="1"/>
+                            </td>
+                            <td>
+                                <select id="Side">
+                                    <option label="Forehand">Forehand</option>
+                                    <option label="Backhand">Backhand</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="Shot">
+                                    <option label="Drive">Drive</option>
+                                    <option label="Volley">Volley</option>
+                                    <option label="Lob">Lob</option>
+                                    <option label="Overhead">Overhead</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="Place">
+                                    <option value="" label="None">N/A</option>
+                                    <option label="Long">Long</option>
+                                    <option label="Wide">Wide</option>
+                                    <option label="Net">Net</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="Type">
+                                    <option label="Winner">Winner</option>
+                                    <option label="Unforced Error">Unforced Error</option>
+                                    <option label="Forced Error">Forced Error</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <script>
-            let point_count = 1;
-
-            document.getElementById("Player1").onblur=Update_Player1_Label;
-            document.getElementById("Player2").onblur=Update_Player2_Label;
-            
-            function Update_Player1_Label(){
-                var player1 = document.getElementById("Player1");
-                var player1_label = document.getElementById("Player1_Label");
-                player1_label.innerText=player1.value;
-            }
-
-            function Update_Player2_Label(){
-                var player2 = document.getElementById("Player2");
-                var player2_label = document.getElementById("Player2_Label");
-                player2_label.innerText=player2.value;
-            }
-
-            function Add_Point_Data() {
-              var table = document.getElementById("match_data");
-              var row = table.insertRow(1);
-
-              //create the new row's columns
-              var Point_Number = row.insertCell(0);
-              var Shot_Count = row.insertCell(1);
-              var Side = row.insertCell(2);
-              var Shot_Type = row.insertCell(3);
-              var Miss_Place = row.insertCell(4);
-              var End_Type = row.insertCell(5);
-              var Ended_By = row.insertCell(6);
-
-              //insert the data for each new column
-              Point_Number.innerHTML = point_count;
-              Shot_Count.innerHTML = document.getElementById("Shot_Count").value;
-              Side.innerHTML = document.getElementById("Side").value;
-              Shot_Type.innerHTML = document.getElementById("Shot").value;
-              Miss_Place.innerHTML = document.getElementById("Place").value;
-              End_Type.innerHTML = document.getElementById("Type").value;
-
-              if (document.getElementById("Player1_Radio").checked){
-                  Ended_By.innerHTML = document.getElementById("Player1_Label").innerText; 
-              }
-
-              if (document.getElementById("Player2_Radio").checked){
-                  Ended_By.innerHTML = document.getElementById("Player2_Label").innerText; 
-              }
-
-              //increment the point count
-              point_count++;
-            }
-            </script>
     </body>
 </html>
