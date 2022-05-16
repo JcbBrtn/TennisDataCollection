@@ -3,7 +3,9 @@
 > “Plans are worthless, but planning is essential“ - Dwight D. Eisenhower
 
 []  - To Do
+
 [/] - In Progress
+
 [X] - Done
 
 
