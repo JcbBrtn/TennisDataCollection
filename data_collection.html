@@ -23,14 +23,22 @@
                 </div>
             </div>
             <hr>
-            <h3>Point Information</h3>
+            <h3 id="Point_Form">Point Information</h3>
             <div class="row justify-content-start mb-3">
                 <div class="col-sm-2 mb-3">
-                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                    <div class="card form-control" style="width: 12rem;"> <!--First card in the row-->
+                        <div class="card-body">
+                            <h6>Shot Count</h6>
+                            <input class="form-control" type="number" id="Shot_Count" min="1" value="1"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
                         <div class="card-body">
                             <h6>Point Ended By</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio" checked>
+                                <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio">
                                 <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
                                 Player 1
                                 </label>
@@ -44,38 +52,61 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="card" style="width: 14rem;"> <!-- Second card in the row-->
-                        <div class="card-body">
-                            <h6>Shot Count</h6>
-                            <input type="number" id="Shot_Count" min="1" value="1"/>
-                        </div>
-                    </div>
-                </div>
             </div> <!-- End of Input row-->
             <div class="row justify-content-start mb-3">
                 <div class="col-sm-2 mb-3">
                     <div class="card" style="width: 12rem;"> <!--First card in the row-->
                         <div class="card-body">
                             <h6>Side Shot was hit</h6>
-                            <select class="form-select" id="Side">
-                                <option label="Serve">Serve</option>
-                                <option label="Forehand">Forehand</option>
-                                <option label="Backhand">Backhand</option> 
-                            </select>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sideRadio" id="Forehand_Radio">
+                                <label class="form-check-label" for="Forehand_Radio" id="Forehand_Label">
+                                Forehand
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sideRadio" id="Backhand_Radio">
+                                <label class="form-check-label" for="Backhand_Radio" id="Backhand_Label">
+                                Backhand
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card" style="width: 14rem;"> <!-- Second card in the row-->
+                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
                         <div class="card-body">
                             <h6>Shot Type</h6>
-                            <select class="form-select" id="Shot">
-                                <option label="Drive">Drive</option>
-                                <option label="Volley">Volley</option>
-                                <option label="Lob">Lob</option>
-                                <option label="Overhead">Overhead</option>
-                            </select>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Serve_Radio">
+                                <label class="form-check-label" for="Serve_Radio" id="Serve_Label">
+                                Serve
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Drive_Radio">
+                                <label class="form-check-label" for="Drive_Radio" id="Drive_Label">
+                                Drive
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Volley_Radio">
+                                <label class="form-check-label" for="Volley_Radio" id="Volley_Label">
+                                Volley
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Lob_Radio">
+                                <label class="form-check-label" for="Lob_Radio" id="Lob_Label">
+                                Lob
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Overhead_Radio">
+                                <label class="form-check-label" for="Overhead_Radio" id="Overhead_Label">
+                                Overhead
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,31 +116,65 @@
                     <div class="card" style="width: 12rem;"> <!--First card in the row-->
                         <div class="card-body">
                             <h6>How the shot missed</h6>
-                            <select class="form-select" id="Place">
-                                <option value="" label="None">N/A</option>
-                                <option label="Long">Long</option>
-                                <option label="Wide">Wide</option>
-                                <option label="Net">Net</option>
-                            </select>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="None_Radio">
+                                <label class="form-check-label" for="None_Radio" id="None_Label">
+                                None
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="Long_Radio">
+                                <label class="form-check-label" for="Long_Radio" id="Long_Label">
+                                Long
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="Wide_Radio">
+                                <label class="form-check-label" for="Wide_Radio" id="Wide_Label">
+                                Wide
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="Net_Radio">
+                                <label class="form-check-label" for="Net_Radio" id="Net_Label">
+                                Net
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card" style="width: 14rem;"> <!-- Second card in the row-->
+                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
                         <div class="card-body">
                             <h6>How the point ended</h6>
-                            <select class="form-select" id="Type">
-                                <option label="Winner">Winner</option>
-                                <option label="Unforced Error">Unforced Error</option>
-                                <option label="Forced Error">Forced Error</option>
-                            </select>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="kindRadio" id="Winner_Radio">
+                                <label class="form-check-label" for="Winner_Radio" id="Winner_Label">
+                                Winner
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="kindRadio" id="UE_Radio">
+                                <label class="form-check-label" for="UE_Radio" id="UE_Label">
+                                Unforced Error
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="kindRadio" id="FE_Radio">
+                                <label class="form-check-label" for="FE_Radio" id="FE_Label">
+                                Forced Error
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div> <!-- End of Input row-->
-            <div class="row mb-3">
+            <div class="row mb-3 justify-content-start">
                 <div class="col-sm-6 ">
-                    <button class="btn btn-light" id="Submit_Btn" type="button" onclick="Add_Point_Data()">Add Point</button>
+                    <button class="btn btn-outline-primary" id="Submit_Btn" type="button" onclick="Add_Point_Data()">Add Point</button>
+                </div>
+                <div class="col-sm-6 ">
+                    <button class="btn btn-outline-secondary" id="Toggle_Table_Btn" type="button" onclick="Toggle_Table()">Toggle Table</button>
                 </div>
             </div>
             <div class="row">
