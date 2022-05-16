@@ -17,6 +17,10 @@ function Toggle_Table(){
     table.classList.toggle("invisible");
 }
 
+function Reset_Input_Fields(){
+    document.getElementById("Shot_Count").value = 1;
+}
+
 function Add_Point_Data() {
     var table = document.getElementById("match_data");
     var row = table.insertRow(1);
@@ -97,4 +101,7 @@ function Add_Point_Data() {
 
     //increment the point count
     point_count++;
+
+    //Reset all of the input field back to their default values.
+    Reset_Input_Fields();
 }
