@@ -22,12 +22,14 @@ function Add_Point_Data() {
 
     //create the new row's columns
     var Point_Number = row.insertCell(0);
-    var Shot_Count = row.insertCell(1);
-    var Side = row.insertCell(2);
-    var Shot_Type = row.insertCell(3);
-    var Miss_Place = row.insertCell(4);
-    var End_Type = row.insertCell(5);
-    var Ended_By = row.insertCell(6);
+    var Ended_By = row.insertCell(1);
+    var Shot_Count = row.insertCell(2);
+    var Side = row.insertCell(3);
+    var Shot_Type = row.insertCell(4);
+    var Miss_Place = row.insertCell(5);
+    var End_Type = row.insertCell(6);
+    var Condensed = row.insertCell(7);
+    
 
     //insert the data for each new column
     Point_Number.innerHTML = point_count;
