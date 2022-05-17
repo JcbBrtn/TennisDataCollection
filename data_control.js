@@ -9,12 +9,14 @@ function Update_Player1_Label(){
     var player1 = document.getElementById("Player1");
     var player1_label = document.getElementById("Player1_Label");
     player1_label.innerText=player1.value;
+    document.getElementById("Player1_Table").innerText = player1.value;
 }
 
 function Update_Player2_Label(){
     var player2 = document.getElementById("Player2");
     var player2_label = document.getElementById("Player2_Label");
     player2_label.innerText=player2.value;
+    document.getElementById("Player2_Table").innerText = player2.value;
 }
 
 function Update_Player3_Label(){
@@ -23,10 +25,12 @@ function Update_Player3_Label(){
 
     if (player3.value === ""){
         player3_label.innerText = "Player 3";
+        document.getElementById("Player3_Table").innerText = "Player 3";
         document.getElementById("Player3_Radio").disabled = true;
     }
     else{
         player3_label.innerText=player3.value;
+        document.getElementById("Player3_Table").innerText = player3.value;
         document.getElementById("Player3_Radio").disabled = false;
     }
 }
@@ -37,11 +41,13 @@ function Update_Player4_Label(){
 
     if (player4.value === ""){
         player4_label.innerText = "Player 4";
+        document.getElementById("Player4_Table").innerText = "Player 4";
         document.getElementById("Player4_Radio").disabled = true;
     }
     else{
         player4_label.innerText=player4.value;
         document.getElementById("Player4_Radio").disabled = false;
+        document.getElementById("Player4_Table").innerText = player4.value;
     }
 }
 

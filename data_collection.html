@@ -38,161 +38,745 @@
             </div>
             <hr>
             <h3 id="Point_Form">Point Information</h3>
-            <div class="row justify-content-start mb-3">
-                <div class="col-sm-2 mb-3">
-                    <div class="card form-control" style="width: 12rem;"> <!--First card in the row-->
-                        <div class="card-body">
-                            <h6>Shot Count</h6>
-                            <input class="form-control" type="number" id="Shot_Count" min="1" value="1"/>
+            <div class="row"> <!-- Main Point Information Row -->
+                <div class="col"> <!-- Main Column for Data input -->
+                    <div class="row mb-3">
+                        <div class="col mb-3">
+                            <div class="card form-control" style="width: 12rem;"> <!--First card in the row-->
+                                <div class="card-body">
+                                    <h6>Shot Count</h6>
+                                    <input class="form-control" type="number" id="Shot_Count" min="1" value="1"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
+                                <div class="card-body">
+                                    <h6>Point Ended By</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio">
+                                        <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
+                                        Player 1
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadio" id="Player2_Radio">
+                                        <label class="form-check-label" for="Player2_Radio" id="Player2_Label">
+                                        Player 2
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadio" id="Player3_Radio" disabled>
+                                        <label class="form-check-label" for="Player3_Radio" id="Player3_Label">
+                                        Player 3
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadio" id="Player4_Radio" disabled>
+                                        <label class="form-check-label" for="Player4_Radio" id="Player4_Label">
+                                        Player 4
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- End of Input row-->
+                    <div class="row mb-3">
+                        <div class="col mb-3">
+                            <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                                <div class="card-body">
+                                    <h6>Side Shot was hit</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sideRadio" id="Forehand_Radio">
+                                        <label class="form-check-label" for="Forehand_Radio" id="Forehand_Label">
+                                        Forehand
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sideRadio" id="Backhand_Radio">
+                                        <label class="form-check-label" for="Backhand_Radio" id="Backhand_Label">
+                                        Backhand
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
+                                <div class="card-body">
+                                    <h6>Shot Type</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="typeRadio" id="Serve_Radio">
+                                        <label class="form-check-label" for="Serve_Radio" id="Serve_Label">
+                                        Serve
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="typeRadio" id="Drive_Radio">
+                                        <label class="form-check-label" for="Drive_Radio" id="Drive_Label">
+                                        Drive
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="typeRadio" id="Volley_Radio">
+                                        <label class="form-check-label" for="Volley_Radio" id="Volley_Label">
+                                        Volley
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="typeRadio" id="Lob_Radio">
+                                        <label class="form-check-label" for="Lob_Radio" id="Lob_Label">
+                                        Lob
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="typeRadio" id="Overhead_Radio">
+                                        <label class="form-check-label" for="Overhead_Radio" id="Overhead_Label">
+                                        Overhead
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- End of Input row-->
+                    <div class="row mb-3">
+                        <div class="col mb-3">
+                            <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                                <div class="card-body">
+                                    <h6>How the shot missed</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="howRadio" id="None_Radio">
+                                        <label class="form-check-label" for="None_Radio" id="None_Label">
+                                        None
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="howRadio" id="Long_Radio">
+                                        <label class="form-check-label" for="Long_Radio" id="Long_Label">
+                                        Long
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="howRadio" id="Wide_Radio">
+                                        <label class="form-check-label" for="Wide_Radio" id="Wide_Label">
+                                        Wide
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="howRadio" id="Net_Radio">
+                                        <label class="form-check-label" for="Net_Radio" id="Net_Label">
+                                        Net
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
+                                <div class="card-body">
+                                    <h6>How the point ended</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="kindRadio" id="Winner_Radio">
+                                        <label class="form-check-label" for="Winner_Radio" id="Winner_Label">
+                                        Winner
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="kindRadio" id="UE_Radio">
+                                        <label class="form-check-label" for="UE_Radio" id="UE_Label">
+                                        Unforced Error
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="kindRadio" id="FE_Radio">
+                                        <label class="form-check-label" for="FE_Radio" id="FE_Label">
+                                        Forced Error
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
-                        <div class="card-body">
-                            <h6>Point Ended By</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio">
-                                <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
-                                Player 1
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadio" id="Player2_Radio">
-                                <label class="form-check-label" for="Player2_Radio" id="Player2_Label">
-                                Player 2
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadio" id="Player3_Radio" disabled>
-                                <label class="form-check-label" for="Player3_Radio" id="Player3_Label">
-                                Player 3
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadio" id="Player4_Radio" disabled>
-                                <label class="form-check-label" for="Player4_Radio" id="Player4_Label">
-                                Player 4
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- End of Input row-->
-            <div class="row justify-content-start mb-3">
-                <div class="col-sm-2 mb-3">
-                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
-                        <div class="card-body">
-                            <h6>Side Shot was hit</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="sideRadio" id="Forehand_Radio">
-                                <label class="form-check-label" for="Forehand_Radio" id="Forehand_Label">
-                                Forehand
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="sideRadio" id="Backhand_Radio">
-                                <label class="form-check-label" for="Backhand_Radio" id="Backhand_Label">
-                                Backhand
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
-                        <div class="card-body">
-                            <h6>Shot Type</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="typeRadio" id="Serve_Radio">
-                                <label class="form-check-label" for="Serve_Radio" id="Serve_Label">
-                                Serve
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="typeRadio" id="Drive_Radio">
-                                <label class="form-check-label" for="Drive_Radio" id="Drive_Label">
-                                Drive
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="typeRadio" id="Volley_Radio">
-                                <label class="form-check-label" for="Volley_Radio" id="Volley_Label">
-                                Volley
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="typeRadio" id="Lob_Radio">
-                                <label class="form-check-label" for="Lob_Radio" id="Lob_Label">
-                                Lob
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="typeRadio" id="Overhead_Radio">
-                                <label class="form-check-label" for="Overhead_Radio" id="Overhead_Label">
-                                Overhead
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- End of Input row-->
-            <div class="row justify-content-start mb-3">
-                <div class="col-sm-2 mb-3">
-                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
-                        <div class="card-body">
-                            <h6>How the shot missed</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="howRadio" id="None_Radio">
-                                <label class="form-check-label" for="None_Radio" id="None_Label">
-                                None
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="howRadio" id="Long_Radio">
-                                <label class="form-check-label" for="Long_Radio" id="Long_Label">
-                                Long
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="howRadio" id="Wide_Radio">
-                                <label class="form-check-label" for="Wide_Radio" id="Wide_Label">
-                                Wide
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="howRadio" id="Net_Radio">
-                                <label class="form-check-label" for="Net_Radio" id="Net_Label">
-                                Net
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
-                        <div class="card-body">
-                            <h6>How the point ended</h6>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="kindRadio" id="Winner_Radio">
-                                <label class="form-check-label" for="Winner_Radio" id="Winner_Label">
-                                Winner
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="kindRadio" id="UE_Radio">
-                                <label class="form-check-label" for="UE_Radio" id="UE_Label">
-                                Unforced Error
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="kindRadio" id="FE_Radio">
-                                <label class="form-check-label" for="FE_Radio" id="FE_Label">
-                                Forced Error
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col"> <!-- Main column for Statistical analysis-->
+                    <table id="match_analysis" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Property</th>
+                                    <th id="Player1_Table" scope="col">Player 1</th>
+                                    <th id="Player2_Table" scope="col">Player 2</th>
+                                    <th id="Player3_Table" scope="col">Player 3</th>
+                                    <th id="Player4_Table" scope="col">Player 4</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Shot Count less than 3</td>
+                                    <td id="Player1_SCL3"></td>
+                                    <td id="Player2_SCL3"></td>
+                                    <td id="Player3_SCL3"></td>
+                                    <td id="Player4_SCL3"></td>
+                                    <td id="Total_SCL3"></td>
+                                </tr>
+                                <tr>
+                                    <td>Shot Count 4 - 9</td>
+                                    <td id="Player1_4T9"></td>
+                                    <td id="Player2_4T9"></td>
+                                    <td id="Player3_4T9"></td>
+                                    <td id="Player4_4T9"></td>
+                                    <td id="Total_4T9"></td>
+                                </tr>
+                                <tr>
+                                    <td>Shot Count 10 - 20</td>
+                                    <td id="Player1_10T20"></td>
+                                    <td id="Player2_10T20"></td>
+                                    <td id="Player3_10T20"></td>
+                                    <td id="Player4_10T20"></td>
+                                    <td id="Total_10T20"></td>
+                                </tr>
+                                <tr>
+                                    <td>Shot Count over 20</td>
+                                    <td id="Player1_SG20"></td>
+                                    <td id="Player2_SG20"></td>
+                                    <td id="Player3_SG20"></td>
+                                    <td id="Player4_SG20"></td>
+                                    <td id="Total_SG20"></td>
+                                </tr>
+                                <tr>
+                                    <td>Back to Back Over 10 </td>
+                                    <td id="Player1_BTB"></td>
+                                    <td id="Player2_BTB"></td>
+                                    <td id="Player3_BTB"></td>
+                                    <td id="Player4_BTB"></td>
+                                    <td id="Total_BTB"></td>
+                                </tr>
+                                <tr>
+                                    <td>Average Shot Count</td>
+                                    <td id="Player1_ASC"></td>
+                                    <td id="Player2_ASC"></td>
+                                    <td id="Player3_ASC"></td>
+                                    <td id="Player4_ASC"></td>
+                                    <td id="Total_ASC"></td>
+                                </tr>
+                                <tr>
+                                    <td>Standard Deviation Shot Count</td>
+                                    <td id="Player1_SSC"></td>
+                                    <td id="Player2_SSC"></td>
+                                    <td id="Player3_SSC"></td>
+                                    <td id="Player4_SSC"></td>
+                                    <td id="Total_SSC"></td>
+                                </tr>
+                                <tr>
+                                    <td>Shot Tolerance</td>
+                                    <td id="Player1_ST"></td>
+                                    <td id="Player2_ST"></td>
+                                    <td id="Player3_ST"></td>
+                                    <td id="Player4_ST"></td>
+                                    <td id="Total_ST"></td>
+                                </tr>
+                                <tr>
+                                    <td>Shot Tolerance</td>
+                                    <td id="Player1_ST"></td>
+                                    <td id="Player2_ST"></td>
+                                    <td id="Player3_ST"></td>
+                                    <td id="Player4_ST"></td>
+                                    <td id="Total_ST"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Unforced Errors<b></td>
+                                </tr>
+                                <tr>
+                                    <td>Forehand</td>
+                                    <td id="Player1_UF"></td>
+                                    <td id="Player2_UF"></td>
+                                    <td id="Player3_UF"></td>
+                                    <td id="Player4_UF"></td>
+                                    <td id="Total_UF"></td>
+                                </tr>
+                                <tr>
+                                    <td>Backhand</td>
+                                    <td id="Player1_UB"></td>
+                                    <td id="Player2_UB"></td>
+                                    <td id="Player3_UB"></td>
+                                    <td id="Player4_UB"></td>
+                                    <td id="Total_UB"></td>
+                                </tr>
+                                <tr>
+                                    <td>Serves</td>
+                                    <td id="Player1_US"></td>
+                                    <td id="Player2_US"></td>
+                                    <td id="Player3_US"></td>
+                                    <td id="Player4_US"></td>
+                                    <td id="Total_US"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Net</td>
+                                    <td id="Player1_UDN"></td>
+                                    <td id="Player2_UDN"></td>
+                                    <td id="Player3_UDN"></td>
+                                    <td id="Player4_UDN"></td>
+                                    <td id="Total_UDN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Long</td>
+                                    <td id="Player1_UDL"></td>
+                                    <td id="Player2_UDL"></td>
+                                    <td id="Player3_UDL"></td>
+                                    <td id="Player4_UDL"></td>
+                                    <td id="Total_UDL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Wide</td>
+                                    <td id="Player1_UDW"></td>
+                                    <td id="Player2_UDW"></td>
+                                    <td id="Player3_UDW"></td>
+                                    <td id="Player4_UDW"></td>
+                                    <td id="Total_UDW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Net</td>
+                                    <td id="Player1_UVN"></td>
+                                    <td id="Player2_UVN"></td>
+                                    <td id="Player3_UVN"></td>
+                                    <td id="Player4_UVN"></td>
+                                    <td id="Total_UVN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Long</td>
+                                    <td id="Player1_UVL"></td>
+                                    <td id="Player2_UVL"></td>
+                                    <td id="Player3_UVL"></td>
+                                    <td id="Player4_UVL"></td>
+                                    <td id="Total_UVL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Wide</td>
+                                    <td id="Player1_UVW"></td>
+                                    <td id="Player2_UVW"></td>
+                                    <td id="Player3_UVW"></td>
+                                    <td id="Player4_UVW"></td>
+                                    <td id="Total_UVW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Net</td>
+                                    <td id="Player1_ULN"></td>
+                                    <td id="Player2_ULN"></td>
+                                    <td id="Player3_ULN"></td>
+                                    <td id="Player4_ULN"></td>
+                                    <td id="Total_ULN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Long</td>
+                                    <td id="Player1_ULL"></td>
+                                    <td id="Player2_ULL"></td>
+                                    <td id="Player3_ULL"></td>
+                                    <td id="Player4_ULL"></td>
+                                    <td id="Total_ULL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Wide</td>
+                                    <td id="Player1_ULW"></td>
+                                    <td id="Player2_ULW"></td>
+                                    <td id="Player3_ULW"></td>
+                                    <td id="Player4_ULW"></td>
+                                    <td id="Total_ULW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Net</td>
+                                    <td id="Player1_UON"></td>
+                                    <td id="Player2_UON"></td>
+                                    <td id="Player3_UON"></td>
+                                    <td id="Player4_UON"></td>
+                                    <td id="Total_UON"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Long</td>
+                                    <td id="Player1_UOL"></td>
+                                    <td id="Player2_UOL"></td>
+                                    <td id="Player3_UOL"></td>
+                                    <td id="Player4_UOL"></td>
+                                    <td id="Total_UOL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Wide</td>
+                                    <td id="Player1_UOW"></td>
+                                    <td id="Player2_UOW"></td>
+                                    <td id="Player3_UOW"></td>
+                                    <td id="Player4_UOW"></td>
+                                    <td id="Total_UOW"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Unforced Errors<b></td>
+                                </tr>
+                                <tr>
+                                    <td>Forehand</td>
+                                    <td id="Player1_UF"></td>
+                                    <td id="Player2_UF"></td>
+                                    <td id="Player3_UF"></td>
+                                    <td id="Player4_UF"></td>
+                                    <td id="Total_UF"></td>
+                                </tr>
+                                <tr>
+                                    <td>Backhand</td>
+                                    <td id="Player1_UB"></td>
+                                    <td id="Player2_UB"></td>
+                                    <td id="Player3_UB"></td>
+                                    <td id="Player4_UB"></td>
+                                    <td id="Total_UB"></td>
+                                </tr>
+                                <tr>
+                                    <td>Serves</td>
+                                    <td id="Player1_US"></td>
+                                    <td id="Player2_US"></td>
+                                    <td id="Player3_US"></td>
+                                    <td id="Player4_US"></td>
+                                    <td id="Total_US"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Net</td>
+                                    <td id="Player1_UDN"></td>
+                                    <td id="Player2_UDN"></td>
+                                    <td id="Player3_UDN"></td>
+                                    <td id="Player4_UDN"></td>
+                                    <td id="Total_UDN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Long</td>
+                                    <td id="Player1_UDL"></td>
+                                    <td id="Player2_UDL"></td>
+                                    <td id="Player3_UDL"></td>
+                                    <td id="Player4_UDL"></td>
+                                    <td id="Total_UDL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Wide</td>
+                                    <td id="Player1_UDW"></td>
+                                    <td id="Player2_UDW"></td>
+                                    <td id="Player3_UDW"></td>
+                                    <td id="Player4_UDW"></td>
+                                    <td id="Total_UDW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Net</td>
+                                    <td id="Player1_UVN"></td>
+                                    <td id="Player2_UVN"></td>
+                                    <td id="Player3_UVN"></td>
+                                    <td id="Player4_UVN"></td>
+                                    <td id="Total_UVN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Long</td>
+                                    <td id="Player1_UVL"></td>
+                                    <td id="Player2_UVL"></td>
+                                    <td id="Player3_UVL"></td>
+                                    <td id="Player4_UVL"></td>
+                                    <td id="Total_UVL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Wide</td>
+                                    <td id="Player1_UVW"></td>
+                                    <td id="Player2_UVW"></td>
+                                    <td id="Player3_UVW"></td>
+                                    <td id="Player4_UVW"></td>
+                                    <td id="Total_UVW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Net</td>
+                                    <td id="Player1_ULN"></td>
+                                    <td id="Player2_ULN"></td>
+                                    <td id="Player3_ULN"></td>
+                                    <td id="Player4_ULN"></td>
+                                    <td id="Total_ULN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Long</td>
+                                    <td id="Player1_ULL"></td>
+                                    <td id="Player2_ULL"></td>
+                                    <td id="Player3_ULL"></td>
+                                    <td id="Player4_ULL"></td>
+                                    <td id="Total_ULL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Wide</td>
+                                    <td id="Player1_ULW"></td>
+                                    <td id="Player2_ULW"></td>
+                                    <td id="Player3_ULW"></td>
+                                    <td id="Player4_ULW"></td>
+                                    <td id="Total_ULW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Net</td>
+                                    <td id="Player1_UON"></td>
+                                    <td id="Player2_UON"></td>
+                                    <td id="Player3_UON"></td>
+                                    <td id="Player4_UON"></td>
+                                    <td id="Total_UON"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Long</td>
+                                    <td id="Player1_UOL"></td>
+                                    <td id="Player2_UOL"></td>
+                                    <td id="Player3_UOL"></td>
+                                    <td id="Player4_UOL"></td>
+                                    <td id="Total_UOL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Wide</td>
+                                    <td id="Player1_UOW"></td>
+                                    <td id="Player2_UOW"></td>
+                                    <td id="Player3_UOW"></td>
+                                    <td id="Player4_UOW"></td>
+                                    <td id="Total_UOW"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Forced Errors<b></td>
+                                </tr>
+                                <tr>
+                                    <td>Forehand</td>
+                                    <td id="Player1_FF"></td>
+                                    <td id="Player2_FF"></td>
+                                    <td id="Player3_FF"></td>
+                                    <td id="Player4_FF"></td>
+                                    <td id="Total_FF"></td>
+                                </tr>
+                                <tr>
+                                    <td>Backhand</td>
+                                    <td id="Player1_FB"></td>
+                                    <td id="Player2_FB"></td>
+                                    <td id="Player3_FB"></td>
+                                    <td id="Player4_FB"></td>
+                                    <td id="Total_FB"></td>
+                                </tr>
+                                <tr>
+                                    <td>Serves</td>
+                                    <td id="Player1_FS"></td>
+                                    <td id="Player2_FS"></td>
+                                    <td id="Player3_FS"></td>
+                                    <td id="Player4_FS"></td>
+                                    <td id="Total_FS"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Net</td>
+                                    <td id="Player1_FDN"></td>
+                                    <td id="Player2_FDN"></td>
+                                    <td id="Player3_FDN"></td>
+                                    <td id="Player4_FDN"></td>
+                                    <td id="Total_FDN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Long</td>
+                                    <td id="Player1_FDL"></td>
+                                    <td id="Player2_FDL"></td>
+                                    <td id="Player3_FDL"></td>
+                                    <td id="Player4_FDL"></td>
+                                    <td id="Total_FDL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Wide</td>
+                                    <td id="Player1_FDW"></td>
+                                    <td id="Player2_FDW"></td>
+                                    <td id="Player3_FDW"></td>
+                                    <td id="Player4_FDW"></td>
+                                    <td id="Total_FDW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Net</td>
+                                    <td id="Player1_FVN"></td>
+                                    <td id="Player2_FVN"></td>
+                                    <td id="Player3_FVN"></td>
+                                    <td id="Player4_FVN"></td>
+                                    <td id="Total_FVN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Long</td>
+                                    <td id="Player1_FVL"></td>
+                                    <td id="Player2_FVL"></td>
+                                    <td id="Player3_FVL"></td>
+                                    <td id="Player4_FVL"></td>
+                                    <td id="Total_FVL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Wide</td>
+                                    <td id="Player1_FVW"></td>
+                                    <td id="Player2_FVW"></td>
+                                    <td id="Player3_FVW"></td>
+                                    <td id="Player4_FVW"></td>
+                                    <td id="Total_FVW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Net</td>
+                                    <td id="Player1_FLN"></td>
+                                    <td id="Player2_FLN"></td>
+                                    <td id="Player3_FLN"></td>
+                                    <td id="Player4_FLN"></td>
+                                    <td id="Total_FLN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Long</td>
+                                    <td id="Player1_FLL"></td>
+                                    <td id="Player2_FLL"></td>
+                                    <td id="Player3_FLL"></td>
+                                    <td id="Player4_FLL"></td>
+                                    <td id="Total_FLL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Wide</td>
+                                    <td id="Player1_FLW"></td>
+                                    <td id="Player2_FLW"></td>
+                                    <td id="Player3_FLW"></td>
+                                    <td id="Player4_FLW"></td>
+                                    <td id="Total_FLW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Net</td>
+                                    <td id="Player1_FON"></td>
+                                    <td id="Player2_FON"></td>
+                                    <td id="Player3_FON"></td>
+                                    <td id="Player4_FON"></td>
+                                    <td id="Total_FON"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Long</td>
+                                    <td id="Player1_FOL"></td>
+                                    <td id="Player2_FOL"></td>
+                                    <td id="Player3_FOL"></td>
+                                    <td id="Player4_FOL"></td>
+                                    <td id="Total_FOL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Wide</td>
+                                    <td id="Player1_FOW"></td>
+                                    <td id="Player2_FOW"></td>
+                                    <td id="Player3_FOW"></td>
+                                    <td id="Player4_FOW"></td>
+                                    <td id="Total_FOW"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Winners<b></td>
+                                </tr>
+                                <tr>
+                                    <td>Forehand</td>
+                                    <td id="Player1_WF"></td>
+                                    <td id="Player2_WF"></td>
+                                    <td id="Player3_WF"></td>
+                                    <td id="Player4_WF"></td>
+                                    <td id="Total_WF"></td>
+                                </tr>
+                                <tr>
+                                    <td>Backhand</td>
+                                    <td id="Player1_WB"></td>
+                                    <td id="Player2_WB"></td>
+                                    <td id="Player3_WB"></td>
+                                    <td id="Player4_WB"></td>
+                                    <td id="Total_WB"></td>
+                                </tr>
+                                <tr>
+                                    <td>Serves</td>
+                                    <td id="Player1_WS"></td>
+                                    <td id="Player2_WS"></td>
+                                    <td id="Player3_WS"></td>
+                                    <td id="Player4_WS"></td>
+                                    <td id="Total_WS"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Net</td>
+                                    <td id="Player1_WDN"></td>
+                                    <td id="Player2_WDN"></td>
+                                    <td id="Player3_WDN"></td>
+                                    <td id="Player4_WDN"></td>
+                                    <td id="Total_WDN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Long</td>
+                                    <td id="Player1_WDL"></td>
+                                    <td id="Player2_WDL"></td>
+                                    <td id="Player3_WDL"></td>
+                                    <td id="Player4_WDL"></td>
+                                    <td id="Total_WDL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Drives Wide</td>
+                                    <td id="Player1_WDW"></td>
+                                    <td id="Player2_WDW"></td>
+                                    <td id="Player3_WDW"></td>
+                                    <td id="Player4_WDW"></td>
+                                    <td id="Total_WDW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Net</td>
+                                    <td id="Player1_WVN"></td>
+                                    <td id="Player2_WVN"></td>
+                                    <td id="Player3_WVN"></td>
+                                    <td id="Player4_WVN"></td>
+                                    <td id="Total_WVN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Long</td>
+                                    <td id="Player1_WVL"></td>
+                                    <td id="Player2_WVL"></td>
+                                    <td id="Player3_WVL"></td>
+                                    <td id="Player4_WVL"></td>
+                                    <td id="Total_WVL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Volley Wide</td>
+                                    <td id="Player1_WVW"></td>
+                                    <td id="Player2_WVW"></td>
+                                    <td id="Player3_WVW"></td>
+                                    <td id="Player4_WVW"></td>
+                                    <td id="Total_WVW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Net</td>
+                                    <td id="Player1_WLN"></td>
+                                    <td id="Player2_WLN"></td>
+                                    <td id="Player3_WLN"></td>
+                                    <td id="Player4_WLN"></td>
+                                    <td id="Total_WLN"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Long</td>
+                                    <td id="Player1_WLL"></td>
+                                    <td id="Player2_WLL"></td>
+                                    <td id="Player3_WLL"></td>
+                                    <td id="Player4_WLL"></td>
+                                    <td id="Total_WLL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Lob Wide</td>
+                                    <td id="Player1_WLW"></td>
+                                    <td id="Player2_WLW"></td>
+                                    <td id="Player3_WLW"></td>
+                                    <td id="Player4_WLW"></td>
+                                    <td id="Total_WLW"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Net</td>
+                                    <td id="Player1_WON"></td>
+                                    <td id="Player2_WON"></td>
+                                    <td id="Player3_WON"></td>
+                                    <td id="Player4_WON"></td>
+                                    <td id="Total_WON"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Long</td>
+                                    <td id="Player1_WOL"></td>
+                                    <td id="Player2_WOL"></td>
+                                    <td id="Player3_WOL"></td>
+                                    <td id="Player4_WOL"></td>
+                                    <td id="Total_WOL"></td>
+                                </tr>
+                                <tr>
+                                    <td>Overhead Wide</td>
+                                    <td id="Player1_WOW"></td>
+                                    <td id="Player2_WOW"></td>
+                                    <td id="Player3_WOW"></td>
+                                    <td id="Player4_WOW"></td>
+                                    <td id="Total_WOW"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                 </div>
             </div> <!-- End of Input row-->
             <div class="row mb-3 justify-content-start">
