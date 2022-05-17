@@ -1,4 +1,9 @@
 let point_count = 1;
+let data = [];
+/*
+Our data is an array of arrays. Each element of the array has an index that is the point count and follows the following form.
+point = [point_count, ended_by, shot_count, side, shot_type, miss_place, end_type]
+*/
 
 function Update_Player1_Label(){
     var player1 = document.getElementById("Player1");
@@ -12,13 +17,62 @@ function Update_Player2_Label(){
     player2_label.innerText=player2.value;
 }
 
+function Update_Player3_Label(){
+    var player3 = document.getElementById("Player3");
+    var player3_label = document.getElementById("Player3_Label");
+
+    if (player3.value === ""){
+        player3_label.innerText = "Player 3";
+        document.getElementById("Player3_Radio").disabled = true;
+    }
+    else{
+        player3_label.innerText=player3.value;
+        document.getElementById("Player3_Radio").disabled = false;
+    }
+}
+
+function Update_Player4_Label(){
+    var player4 = document.getElementById("Player4");
+    var player4_label = document.getElementById("Player4_Label");
+
+    if (player4.value === ""){
+        player4_label.innerText = "Player 4";
+        document.getElementById("Player4_Radio").disabled = true;
+    }
+    else{
+        player4_label.innerText=player4.value;
+        document.getElementById("Player4_Radio").disabled = false;
+    }
+}
+
 function Toggle_Table(){
     table = document.getElementById("match_data");
     table.classList.toggle("invisible");
 }
 
 function Reset_Input_Fields(){
+    //Reset Shot count
     document.getElementById("Shot_Count").value = 1;
+
+    //Clear all radio buttons
+    document.getElementById("Serve_Radio").checked = false;
+    document.getElementById("Forehand_Radio").checked = false;
+    document.getElementById("Backhand_Radio").checked = false;
+    document.getElementById("Drive_Radio").checked = false;
+    document.getElementById("Volley_Radio").checked = false;
+    document.getElementById("Lob_Radio").checked = false;
+    document.getElementById("Overhead_Radio").checked = false;
+    document.getElementById("None_Radio").checked = false;
+    document.getElementById("Long_Radio").checked = false;
+    document.getElementById("Wide_Radio").checked = false;
+    document.getElementById("Net_Radio").checked = false;
+    document.getElementById("Winner_Radio").checked = false;
+    document.getElementById("UE_Radio").checked = false;
+    document.getElementById("FE_Radio").checked = false;
+    document.getElementById("Player1_Radio").checked = false;
+    document.getElementById("Player2_Radio").checked = false;
+    document.getElementById("Player3_Radio").checked = false;
+    document.getElementById("Player4_Radio").checked = false;
 }
 
 function Add_Point_Data() {
@@ -35,6 +89,7 @@ function Add_Point_Data() {
     var End_Type = row.insertCell(6);
     var Condensed = row.insertCell(7);
     
+    var this_point = []
 
     //insert the data for each new column
     Point_Number.innerHTML = point_count;
@@ -94,9 +149,14 @@ function Add_Point_Data() {
     if (document.getElementById("Player1_Radio").checked){
         Ended_By.innerHTML = document.getElementById("Player1_Label").innerText; 
     }
-
     if (document.getElementById("Player2_Radio").checked){
         Ended_By.innerHTML = document.getElementById("Player2_Label").innerText; 
+    }
+    if (document.getElementById("Player3_Radio").checked){
+        Ended_By.innerHTML = document.getElementById("Player3_Label").innerText; 
+    }
+    if (document.getElementById("Player4_Radio").checked){
+        Ended_By.innerHTML = document.getElementById("Player4_Label").innerText; 
     }
 
     //increment the point count
