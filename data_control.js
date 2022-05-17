@@ -114,6 +114,8 @@ function Add_Point_Data() {
 
     //insert the data for each new column
     Point_Number.innerHTML = point_count;
+    this_point.push(point_count);
+
     Shot_Count.innerHTML = document.getElementById("Shot_Count").value;
     this_point.push(document.getElementById("Shot_Count").value);
 
@@ -146,7 +148,7 @@ function Add_Point_Data() {
     s = Get_Radio_Values(arr);
     Ended_By.innerHTML = s;
     this_point.push(s)
-
+    console.log(this_point);
     data.push(this_point);
 
     //increment the point count
@@ -154,6 +156,9 @@ function Add_Point_Data() {
 
     //Reset all of the input field back to their default values.
     Reset_Input_Fields();
+
+    //Update the Stats fields
+    Update_Stats();
 }
 
 //#################################################################
@@ -161,3 +166,25 @@ function Add_Point_Data() {
 //                Statistical Analysis Methods
 //
 //#################################################################
+
+function Update_Stats(){
+    players = ["Player1", "Player2", "Player3", "Player4"];
+    total = 0;
+    for (let i =0; i < players.length; i++){
+        p = players[i];
+        count = Get_SCL3(document.getElementById(p + "_Label").innerText);
+        document.getElementById(p + "_SCL3").innerText = count;
+    }
+    document.getElementById("Total_SCL3").innerText = total;
+
+}
+
+function Get_SCL3(player){
+    total = 0;
+    for (var point in data){
+        if(point[6] == player && Number(point[1]) < 3){
+            total+=1;
+        }
+    }
+    return total;
+}
