@@ -155,3 +155,9 @@ function Add_Point_Data() {
     //Reset all of the input field back to their default values.
     Reset_Input_Fields();
 }
+
+//#################################################################
+//
+//                Statistical Analysis Methods
+//
+//#################################################################
