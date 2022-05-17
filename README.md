@@ -70,28 +70,29 @@ This by shot feature will be put into the ideas area for added features.
 
 ## For the statistics we get from this, here is what we extract
 
-- Shot Count Analysis ( x < 3, 4 < x < 9, 10 < x < 20, 20 < x )
+- Shot Count Analysis ( x < 3, 4 < x < 9, 10 < x < 20, 20 < x ) SCL3, 4T9, 10T20, SG20
 
-- Back to Back points with Shot Count > 10 
+- Back to Back points with Shot Count > 10 BTB
 
-- Average shot count per player (this would be the average shot count when the point is ended)
+- Average shot count per player (this would be the average shot count when the point is ended) ASC
 
-- Standard Deviation of shot count.
+- Standard Deviation of shot count. SSC
 
-- Shot Tolerance ( mean SC + Standard Deviation) This means 80% of the time, as soon as the ball passes this shot count, you will end the point.
+- Shot Tolerance ( mean SC + Standard Deviation) This means 80% of the time, as soon as the ball passes this shot count, you will end the point. ST
 
-- Unforced Errors (Forehand/Backhand)
+- Unforced Errors 
+    - (Forehand/Backhand) UF, UB
 
-- Service Fault
+    - Service Fault SF
 
-- Drives (net, long, wide) can breakdown further into forehand and backhand
+    - Drives (net, long, wide) can breakdown further into forehand and backhand UDN, UDL, UDW
 
-- Volleys  (net, long, wide) can breakdown further into forehand and backhand
+    - Volleys  (net, long, wide) can breakdown further into forehand and backhand UVN,UVL,UVW
 
-- Lobs  (net, long, wide) can breakdown further into forehand and backhand
+    - Lobs  (net, long, wide) can breakdown further into forehand and backhand ULN ULL ULW
 
-- Overheads  (net, long, wide)
+    - Overheads  (net, long, wide)
 
-- Forced Errors, for each area we labeled in unforced errors
+- Forced Errors, for each area we labeled in unforced errors (Except Serves)
 
 - Clean winners, for each of the areas labeled above
