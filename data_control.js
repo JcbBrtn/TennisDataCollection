@@ -2,7 +2,7 @@ let point_count = 1;
 let data = [];
 /*
 Our data is an array of arrays. Each element of the array has an index that is the point count and follows the following form.
-point = [point_count, ended_by, shot_count, side, shot_type, miss_place, end_type]
+point = [point_count, shot_count, side, shot_type, miss_place, end_type, ended_by]
 */
 
 function Update_Player1_Label(){
@@ -81,6 +81,22 @@ function Reset_Input_Fields(){
     document.getElementById("Player4_Radio").checked = false;
 }
 
+function Get_Radio_Values(arr_of_radios){
+    for (var e of arr_of_radios){
+        if (document.getElementById(e + "_Radio").checked){
+            //If the radio is checked we want the label innerText
+            inTxt = document.getElementById(e + "_Label").innerText;
+            if(inTxt == "None"){
+                return "";
+            }
+            else{
+                return inTxt;
+            }
+        }
+    }
+    return "";
+}
+
 function Add_Point_Data() {
     var table = document.getElementById("match_data");
     var row = table.insertRow(1);
@@ -93,77 +109,45 @@ function Add_Point_Data() {
     var Shot_Type = row.insertCell(4);
     var Miss_Place = row.insertCell(5);
     var End_Type = row.insertCell(6);
-    var Condensed = row.insertCell(7);
     
     var this_point = []
 
     //insert the data for each new column
     Point_Number.innerHTML = point_count;
     Shot_Count.innerHTML = document.getElementById("Shot_Count").value;
+    this_point.push(document.getElementById("Shot_Count").value);
 
     //Check the side radios for forehand or backhand
-    if (document.getElementById("Forehand_Radio").checked){
-        Side.innerHTML = document.getElementById("Forehand_Label").innerText; 
-    }
-    else if (document.getElementById("Backhand_Radio").checked){
-        Side.innerHTML = document.getElementById("Backhand_Label").innerText; 
-    }
+    arr = ["Forehand", "Backhand"];
+    s = Get_Radio_Values(arr);
+    Side.innerHTML = s;
+    this_point.push(s)
 
     //Check the Type radios for the type of shot missed
-    if (document.getElementById("Serve_Radio").checked){
-        Shot_Type.innerHTML = document.getElementById("Serve_Label").innerText;
-    }
-    if (document.getElementById("Drive_Radio").checked){
-        Shot_Type.innerHTML = document.getElementById("Drive_Label").innerText;
-    }
-    if (document.getElementById("Volley_Radio").checked){
-        Shot_Type.innerHTML = document.getElementById("Volley_Label").innerText;
-    }
-    if (document.getElementById("Lob_Radio").checked){
-        Shot_Type.innerHTML = document.getElementById("Lob_Label").innerText;
-    }
-    if (document.getElementById("Overhead_Radio").checked){
-        Shot_Type.innerHTML = document.getElementById("Overhead_Label").innerText;
-    }
+    arr = ["Serve", "Drive", "Volley", "Lob", "Overhead"];
+    s = Get_Radio_Values(arr);
+    Shot_Type.innerHTML = s;
+    this_point.push(s)
 
     //Check to see how the shot was missed
-    if (document.getElementById("None_Radio").checked){
-        Miss_Place.innerHTML = "";
-    }
-    if (document.getElementById("Long_Radio").checked){
-        Miss_Place.innerHTML = document.getElementById("Long_Label").innerText;
-    }
-    if (document.getElementById("Wide_Radio").checked){
-        Miss_Place.innerHTML = document.getElementById("Wide_Label").innerText;
-    }
-    if (document.getElementById("Net_Radio").checked){
-        Miss_Place.innerHTML = document.getElementById("Net_Label").innerText;
-    }
+    arr = ["None", "Long", "Wide", "Net"];
+    s = Get_Radio_Values(arr);
+    Miss_Place.innerHTML = s;
+    this_point.push(s)
 
     //Check to see what kind of error it was
-    if (document.getElementById("Winner_Radio").checked){
-        End_Type.innerHTML = document.getElementById("Winner_Label").innerText;
-    }
-    if (document.getElementById("UE_Radio").checked){
-        End_Type.innerHTML = document.getElementById("UE_Label").innerText;
-    }
-    if (document.getElementById("FE_Radio").checked){
-        End_Type.innerHTML = document.getElementById("FE_Label").innerText;
-    }
+    arr = ["Winner", "UE", "FE"];
+    s = Get_Radio_Values(arr);
+    End_Type.innerHTML = s;
+    this_point.push(s)
 
     //Get data from Player Ended radio buttons
-    if (document.getElementById("Player1_Radio").checked){
-        Ended_By.innerHTML = document.getElementById("Player1_Label").innerText; 
-    }
-    if (document.getElementById("Player2_Radio").checked){
-        Ended_By.innerHTML = document.getElementById("Player2_Label").innerText; 
-    }
-    if (document.getElementById("Player3_Radio").checked){
-        Ended_By.innerHTML = document.getElementById("Player3_Label").innerText; 
-    }
-    if (document.getElementById("Player4_Radio").checked){
-        Ended_By.innerHTML = document.getElementById("Player4_Label").innerText; 
-    }
+    arr = ["Player1", "Player2", "Player3", "Player4"];
+    s = Get_Radio_Values(arr);
+    Ended_By.innerHTML = s;
+    this_point.push(s)
+
+    data.push(this_point);
 
     //increment the point count
     point_count++;
