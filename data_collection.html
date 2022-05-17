@@ -9,53 +9,218 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
+        <script src="data_control.js"></script>
     </head>
     <body>
-        <div class="container">
-            Let's get it started in here
-
-            <button type="button" onclick="Add_Point_Data()">Add Point</button>
-
-            <table id="match_data" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Point Number</th>
-                        <th scope="col">Shot Count</th>
-                        <th scope="col">Point Ended</th>
-                        <th scope="col">End Type</th>
-                        <th scope="col">Ended By</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-
+        <div class="container mt-3">
+            <h3>Please Enter Each Player's Name.</h3>
+            <div class="row mb-3">
+                <div class="col-xs-3 mb-2">
+                    <h6>Team 1</h6>
+                </div>
+                <div class="col-sm-3 mb-2">
+                    <input type="text" id="Player1" placeholder="Player 1" onblur="Update_Player1_Label()"/>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" id="Player2" placeholder="Player 2" onblur="Update_Player2_Label()"/>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-xs-3 mb-2">
+                    <h6>Team 2</h6>
+                </div>
+                <div class="col-sm-3 mb-2">
+                    <input type="text" id="Player3" placeholder="Player 3" onblur="Update_Player3_Label()"/>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" id="Player4" placeholder="Player 4" onblur="Update_Player4_Label()"/>
+                </div>
+            </div>
+            <hr>
+            <h3 id="Point_Form">Point Information</h3>
+            <div class="row justify-content-start mb-3">
+                <div class="col-sm-2 mb-3">
+                    <div class="card form-control" style="width: 12rem;"> <!--First card in the row-->
+                        <div class="card-body">
+                            <h6>Shot Count</h6>
+                            <input class="form-control" type="number" id="Shot_Count" min="1" value="1"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
+                        <div class="card-body">
+                            <h6>Point Ended By</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio">
+                                <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
+                                Player 1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="Player2_Radio">
+                                <label class="form-check-label" for="Player2_Radio" id="Player2_Label">
+                                Player 2
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="Player3_Radio" disabled>
+                                <label class="form-check-label" for="Player3_Radio" id="Player3_Label">
+                                Player 3
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="Player4_Radio" disabled>
+                                <label class="form-check-label" for="Player4_Radio" id="Player4_Label">
+                                Player 4
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Input row-->
+            <div class="row justify-content-start mb-3">
+                <div class="col-sm-2 mb-3">
+                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                        <div class="card-body">
+                            <h6>Side Shot was hit</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sideRadio" id="Forehand_Radio">
+                                <label class="form-check-label" for="Forehand_Radio" id="Forehand_Label">
+                                Forehand
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sideRadio" id="Backhand_Radio">
+                                <label class="form-check-label" for="Backhand_Radio" id="Backhand_Label">
+                                Backhand
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
+                        <div class="card-body">
+                            <h6>Shot Type</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Serve_Radio">
+                                <label class="form-check-label" for="Serve_Radio" id="Serve_Label">
+                                Serve
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Drive_Radio">
+                                <label class="form-check-label" for="Drive_Radio" id="Drive_Label">
+                                Drive
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Volley_Radio">
+                                <label class="form-check-label" for="Volley_Radio" id="Volley_Label">
+                                Volley
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Lob_Radio">
+                                <label class="form-check-label" for="Lob_Radio" id="Lob_Label">
+                                Lob
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="typeRadio" id="Overhead_Radio">
+                                <label class="form-check-label" for="Overhead_Radio" id="Overhead_Label">
+                                Overhead
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Input row-->
+            <div class="row justify-content-start mb-3">
+                <div class="col-sm-2 mb-3">
+                    <div class="card" style="width: 12rem;"> <!--First card in the row-->
+                        <div class="card-body">
+                            <h6>How the shot missed</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="None_Radio">
+                                <label class="form-check-label" for="None_Radio" id="None_Label">
+                                None
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="Long_Radio">
+                                <label class="form-check-label" for="Long_Radio" id="Long_Label">
+                                Long
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="Wide_Radio">
+                                <label class="form-check-label" for="Wide_Radio" id="Wide_Label">
+                                Wide
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="howRadio" id="Net_Radio">
+                                <label class="form-check-label" for="Net_Radio" id="Net_Label">
+                                Net
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card" style="width: 12rem;"> <!-- Second card in the row-->
+                        <div class="card-body">
+                            <h6>How the point ended</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="kindRadio" id="Winner_Radio">
+                                <label class="form-check-label" for="Winner_Radio" id="Winner_Label">
+                                Winner
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="kindRadio" id="UE_Radio">
+                                <label class="form-check-label" for="UE_Radio" id="UE_Label">
+                                Unforced Error
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="kindRadio" id="FE_Radio">
+                                <label class="form-check-label" for="FE_Radio" id="FE_Label">
+                                Forced Error
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Input row-->
+            <div class="row mb-3 justify-content-start">
+                <div class="col-sm-6 ">
+                    <button class="btn btn-outline-primary" id="Submit_Btn" type="button" onclick="Add_Point_Data()">Add Point</button>
+                </div>
+                <div class="col-sm-6 ">
+                    <button class="btn btn-outline-secondary" id="Toggle_Table_Btn" type="button" onclick="Toggle_Table()">Toggle Table</button>
+                </div>
+            </div>
+            <div class="row">
+                <table id="match_data" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Point Number</th>
+                            <th scope="col">Ended By</th>
+                            <th scope="col">Shot Count</th>
+                            <th scope="col">Side</th>
+                            <th scope="col">Shot Type</th>
+                            <th scope="col">Miss Place</th>
+                            <th scope="col">End Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- This is where the point data will go. -->
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <script>
-            let point_count = 1;
-
-            function Add_Point_Data() {
-              var table = document.getElementById("match_data");
-              var row = table.insertRow(point_count);
-
-              //create the new row's columns
-              var Point_Number = row.insertCell(0);
-              var Shot_Count = row.insertCell(1);
-              var Point_Ended = row.insertCell(2);
-              var End_Type = row.insertCell(3);
-              var Ended_By = row.insertCell(4);
-
-              //insert the data for each new column
-              Point_Number.innerHTML = point_count;
-              Shot_Count.innerHTML = 10;
-              Point_Ended.innerHTML = "FDL";
-              End_Type.innerHTML = "UE";
-              Ended_By.innerHTML = "JB";
-
-              //increment the point count
-              point_count++;
-            }
-            </script>
     </body>
 </html>
