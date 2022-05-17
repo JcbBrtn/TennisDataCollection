@@ -13,12 +13,13 @@
 - [X] - Create Data Collection Page
     - A HTML Form that updates a list of points played with the data entered. The data entry should be able to be accomplished easily without ever taking your hands off the keyboard. I want this to be as easy of a process as possible so the user does not see this data tracking as a burden.
     - Start off with doing by point tracking as outlined in the data collection section below.
-- [/] -  Create Statistical Analysis Page
+- [X] -  Create Statistical Analysis Page
     - A nice looking page with empty fields. Maybe allow the page to take in some data to fill in those fields.
     - This is mainly just to get the UI right. There’s going to be a lot of information so displaying it in a clean and understandable fashion is important
-- [] - Create Backend server to support the running process
+- [X] - Create Backend server to support the running process
     - Data entered into the collection page should now be properly analyzed within the analysis page.
-- [] - Connect the Data Page and the Analysis Page
+    - All of the operations is able to be handled inside of the single HTML File. So there is no need for a robust backend. Instead we just need The html and js file
+- [/] - Connect the Data Page and the Analysis Page
     - The Pages created should now only be accessible when running the server locally
 - [] - Launch the Website
     - This should now be accessible via any internet connected device.
