@@ -232,10 +232,45 @@ function downloadCSVFile(csv_data, t_name) {
 //
 //#################################################################
 
+function Mean(arr){
+    if(arr.length == 0){
+        return 0;
+    }
+
+    total = 0;
+    for(var i in arr){
+        total += i;
+    }
+    return total/arr.length;
+}
+
+function STD(arr, mean){
+    if(arr.length == 0 ){
+        return 0;
+    }
+
+    // Assigning (value - mean) ^ 2 to every array item
+    arr = arr.map((k)=>{
+      return (k - mean) ** 2
+    })
+     
+    // Calculating the sum of updated array
+   let sum = arr.reduce((acc, curr)=> acc + curr, 0);
+    
+   // Calculating the variance
+   let variance = sum / arr.length
+    
+   // Returning the Standered deviation
+   return Math.sqrt(sum / arr.length)
+  }
+
 function Update_Stats(){
     let checks = [SCL3, FT9, TT20, SG20];
     let stats = ["SCL3", "FT9", "TT20", "SG20"]
-    let  players = ["Player1", "Player2", "Player3", "Player4"];
+    let players = ["Player1", "Player2", "Player3", "Player4"];
+    let total_btb = 0;
+    let avg_arr = [];
+    let total_sc = []
     
     for(let i =0; i < players.length; i++){
 
@@ -263,6 +298,42 @@ function Update_Stats(){
             Add_Count_To_Total(stat, count);
         }
 
+        //Time to do BTB, avg, sd and shot tolerance
+        let last_shot_count = 0;
+        let btb_count = 0;
+        let sc_for_player = [];
+        for(let j = 0; j < data.length; j++){
+            point = data[j];
+
+            if(point[6] == player_name){
+                sc_for_player.push(point[1]);
+
+                if(point[1] >= 10 && last_shot_count >= 10){
+                    btb_count++;
+                }
+            }
+
+            if(p == "Player4"){
+                if(point[1] >= 10 && last_shot_count >= 10){
+                    total_btb++;
+                }
+                total_sc.push(point[1]);
+            }
+
+            last_shot_count = point[1];
+        }
+
+        document.getElementById(p + "_BTB").innerText = btb_count;
+
+        let mean = Mean(sc_for_player);
+        avg_arr.push(mean);
+        document.getElementById(p+"_ASC").innerText = mean.toString().substring(0, 3);
+
+        let std = STD(sc_for_player, mean);
+        document.getElementById(p+"_SSC").innerText = std.toString().substring(0, 3)
+
+        document.getElementById(p+"_ST").innerText = (mean + std).toString().substring(0, 3);
+
         //Lets do the 3 letter stat family
         for(var f_key in first_letter_column_val_pair){
             for(var s_key in second_letter_column_val_pair){
@@ -276,7 +347,6 @@ function Update_Stats(){
 
                     var count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 3, second_letter_column_val_pair[s_key], 4, third_letter_column_val_pair[t_key]);
 
-                    console.log(stat);
                     document.getElementById(p + "_" + stat).innerText = count;
 
                     Add_Count_To_Total(stat, count);
@@ -325,6 +395,18 @@ function Update_Stats(){
             }
         }
     }
+
+    //Need to do the Total column for Avg, SD, and Shot Tolerance
+    document.getElementById("Total_BTB").innerText = total_btb;
+
+    total_mean = Mean(avg_arr);
+    console.log(avg_arr);
+    document.getElementById("Total_ASC").innerText = total_mean.toString().substring(0, 3);
+
+    total_std = STD(total_sc, total_mean);
+    document.getElementById("Total_SSC").innerText = total_std.toString().substring(0, 3);
+
+    document.getElementById("Total_ST").innerText = (total_mean + total_std).toString().substring(0, 3);
 }
 
 function Add_Count_To_Total(property, count){
