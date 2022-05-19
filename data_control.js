@@ -239,7 +239,7 @@ function Mean(arr){
 
     total = 0;
     for(var i in arr){
-        total += i;
+        total += arr[i];
     }
     return total/arr.length;
 }
@@ -270,7 +270,7 @@ function Update_Stats(){
     let players = ["Player1", "Player2", "Player3", "Player4"];
     let total_btb = 0;
     let avg_arr = [];
-    let total_sc = []
+    let total_sc = [];
     
     for(let i =0; i < players.length; i++){
 
@@ -306,8 +306,7 @@ function Update_Stats(){
             point = data[j];
 
             if(point[6] == player_name){
-                sc_for_player.push(point[1]);
-
+                sc_for_player.push(Number(point[1]));
                 if(point[1] >= 10 && last_shot_count >= 10){
                     btb_count++;
                 }
@@ -317,7 +316,7 @@ function Update_Stats(){
                 if(point[1] >= 10 && last_shot_count >= 10){
                     total_btb++;
                 }
-                total_sc.push(point[1]);
+                total_sc.push(Number(point[1]));
             }
 
             last_shot_count = point[1];
@@ -340,7 +339,6 @@ function Update_Stats(){
                 for(var t_key in third_letter_column_val_pair){
 
                     var stat = f_key + s_key + t_key;
-
                     if(i == 0){
                         document.getElementById("Total_"+stat).innerText=0;
                     }
@@ -400,7 +398,6 @@ function Update_Stats(){
     document.getElementById("Total_BTB").innerText = total_btb;
 
     total_mean = Mean(avg_arr);
-    console.log(avg_arr);
     document.getElementById("Total_ASC").innerText = total_mean.toString().substring(0, 3);
 
     total_std = STD(total_sc, total_mean);
