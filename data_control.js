@@ -21,6 +21,10 @@ function Update_Player_Label(p_name){
     }
 }
 
+function Select_Radio(e_str){
+    document.getElementById(e_str).checked=true;
+}
+
 function Toggle_Table(){
     table = document.getElementById("match_data");
     table.classList.toggle("invisible");
