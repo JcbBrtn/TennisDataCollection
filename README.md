@@ -1,48 +1,17 @@
 # TennisDataCollection
 
-> “Plans are worthless, but planning is essential“ - Dwight D. Eisenhower
+## How to Use
+If you have decided to download this and run it locally, please open the TennisDataTracker.html using your favorite web browser. From there Fill out the Player's names at the top on the screen where prompted. If you are tracking the stats for a singles match please only use The Player 1 and the Player 2 field. For a doubles match, follow the teams labels.
 
-[]  - To Do
+Once you are ready to begin tracking the points, start by filling out the "Point Information" section, starting with the Shot Count section and filling out the whole row before moving down. 
 
-[/] - In Progress
+For the Shot Count, the serve is 1. Any ball that is marked as a one is either a service fault or an Ace. 2 will be the return.
 
-[X] - Done
+For the point ended by, this is the last person to touch the ball. If it is a miss hit, try to guess the shot they were attempting to hit and fill out from there.
 
+When tracking a serve, you do not need to place or Forehand or Backhand. The stat will also not be able to be tracked if the "How the point ended" is filled out as a Forced Error. 
 
-## Status - Task | Acceptance Criteria | Design Notes
-- [X] - Create Data Collection Page
-    - A HTML Form that updates a list of points played with the data entered. The data entry should be able to be accomplished easily without ever taking your hands off the keyboard. I want this to be as easy of a process as possible so the user does not see this data tracking as a burden.
-    - Start off with doing by point tracking as outlined in the data collection section below.
-- [X] -  Create Statistical Analysis Page
-    - A nice looking page with empty fields. Maybe allow the page to take in some data to fill in those fields.
-    - This is mainly just to get the UI right. There’s going to be a lot of information so displaying it in a clean and understandable fashion is important
-- [X] - Create Backend server to support the running process
-    - Data entered into the collection page should now be properly analyzed within the analysis page.
-    - All of the operations is able to be handled inside of the single HTML File. So there is no need for a robust backend. Instead we just need The html and js file
-- [/] - Connect the Data Page and the Analysis Page
-    - The Pages created should now only be accessible when running the server locally
-- [] - Launch the Website
-    - This should now be accessible via any internet connected device.
-- [] - Extra Features
-
-# Brain Storming Design
-Over all, I would like to create a web server that 2 main features. the first feature is used to enter data. This data will be points/shots during a tennis match. The second feature will show the statistical analysis of the data collected. There are a few features that will need to be decided if we want to add for functionality sake. Depending on the length of this sprint we may only end with a MVP. But the other features may be added as extra improvements in future sprints. or free time.
-
-Here are some ideas… spit balling here:
-
-- Saving match data (This would require a database… or some txt files :wink:).
-
-- Downloading data as CSV.
-
-- Graphs!
-
-- Data uploading capabilities.
-
-- Monte Carlo simulations of fake matches between players (This requires saving a lot of data (But would be one of the coolest features… I wonder if this would have viable results to optimizing match betting (Or end the age old debate of the greatest player of all time)))
-
-- Login accounts
-
-- By shot tracking option
+For ease of use, we have enabled the keyboard to be used by using the tab key to move forward in the section, space bar to select the radio button. and enter once you get the the Add Point button will send the focus back to the shot count which can be incremented using the arrow keys.
 
 ## What data should we keep track of and what should we do with it
 There are a lot of ways to achieve this.  From past data collection I’ve done, we generally followed this outline:
@@ -57,40 +26,30 @@ There are a lot of ways to achieve this.  From past data collection I’ve done,
 
 - Player (The player that hit the shot that ended the point)
 
-We can break this down further by a per shot basis where one point consists of multiple shots we add in the following shot dimension that can be of the form:
-
-- Player Serving
-
-- Forehand/Backhand, Drive/Lob/Overhead/Volley (or  1st/2nd Serve), Deuce/Middle/Ad/Long/Wide/Net
-
-- Unforced Error/Forced Error/Winner
-
-This by shot feature will be put into the ideas area for added features.
-
  
 
 ## For the statistics we get from this, here is what we extract
 
-- Shot Count Analysis ( x < 3, 4 < x < 9, 10 < x < 20, 20 < x ) SCL3, 4T9, 10T20, SG20
+- Shot Count Analysis ( x < 3, 4 < x < 9, 10 < x < 20, 20 < x )
 
-- Back to Back points with Shot Count > 10 BTB
+- Back to Back points with Shot Count > 10
 
-- Average shot count per player (this would be the average shot count when the point is ended) ASC
+- Average shot count per player (this would be the average shot count when the point is ended)
 
-- Standard Deviation of shot count. SSC
+- Standard Deviation of shot count.
 
-- Shot Tolerance ( mean SC + Standard Deviation) This means 80% of the time, as soon as the ball passes this shot count, you will end the point. ST
+- Shot Tolerance ( mean SC + Standard Deviation) This means 80% of the time, as soon as the ball passes this shot count, you will end the point.
 
 - Unforced Errors 
-    - (Forehand/Backhand) UF, UB
+    - (Forehand/Backhand)
 
-    - Service Fault SF
+    - Service Fault
 
-    - Drives (net, long, wide) can breakdown further into forehand and backhand UDN, UDL, UDW
+    - Drives (net, long, wide) can breakdown further into forehand and backhand
 
-    - Volleys  (net, long, wide) can breakdown further into forehand and backhand UVN,UVL,UVW
+    - Volleys  (net, long, wide) can breakdown further into forehand and backhand
 
-    - Lobs  (net, long, wide) can breakdown further into forehand and backhand ULN ULL ULW
+    - Lobs  (net, long, wide) can breakdown further into forehand and backhand
 
     - Overheads  (net, long, wide)
 
