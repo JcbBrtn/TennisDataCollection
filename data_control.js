@@ -55,24 +55,12 @@ function Reset_Input_Fields(){
     document.getElementById("Shot_Count").value = 1;
 
     //Clear all radio buttons
-    document.getElementById("Serve_Radio").checked = false;
-    document.getElementById("Forehand_Radio").checked = false;
-    document.getElementById("Backhand_Radio").checked = false;
-    document.getElementById("Drive_Radio").checked = false;
-    document.getElementById("Volley_Radio").checked = false;
-    document.getElementById("Lob_Radio").checked = false;
-    document.getElementById("Overhead_Radio").checked = false;
-    document.getElementById("None_Radio").checked = false;
-    document.getElementById("Long_Radio").checked = false;
-    document.getElementById("Wide_Radio").checked = false;
-    document.getElementById("Net_Radio").checked = false;
-    document.getElementById("Winner_Radio").checked = false;
-    document.getElementById("UE_Radio").checked = false;
-    document.getElementById("FE_Radio").checked = false;
-    document.getElementById("Player1_Radio").checked = false;
-    document.getElementById("Player2_Radio").checked = false;
-    document.getElementById("Player3_Radio").checked = false;
-    document.getElementById("Player4_Radio").checked = false;
+    var radios = document.getElementsByTagName('input');
+    for (i = 0; i < radios.length; i++) {
+        if (radios[i].type == 'radio') {
+            radios[i].checked = false;
+        }
+    }
 
     Check_For_Serve();
 }
@@ -93,7 +81,8 @@ function Get_Radio_Values(arr_of_radios){
     return "";
 }
 
-function Add_Point_Data() {
+function Create_New_Rows(p_count, shot_count, side, shot_type, miss_place, end_type, ended_by){
+    //create the new row
     var table = document.getElementById("match_data");
     var row = table.insertRow(1);
 
@@ -108,45 +97,56 @@ function Add_Point_Data() {
     
     var this_point = []
 
-    //insert the data for each new column
-    Point_Number.innerHTML = point_count;
-    this_point.push(point_count);
+    Point_Number.innerHTML = p_count;
+    this_point.push(p_count);
 
-    Shot_Count.innerHTML = document.getElementById("Shot_Count").value;
-    this_point.push(document.getElementById("Shot_Count").value);
+    Shot_Count.innerHTML = shot_count;
+    this_point.push(shot_count);
+
+    Side.innerHTML = side;
+    this_point.push(side);
+
+    Shot_Type.innerHTML = shot_type;
+    this_point.push(shot_type);
+
+    Miss_Place.innerHTML = miss_place;
+    this_point.push(miss_place);
+
+    End_Type.innerHTML = end_type;
+    this_point.push(end_type);
+
+    Ended_By.innerHTML = ended_by;
+    this_point.push(ended_by);
+
+    data.push(this_point);
+}
+
+function Add_Point_Data() {
 
     //Check the side radios for forehand or backhand
     arr = ["Forehand", "Backhand"];
-    s = Get_Radio_Values(arr);
-    Side.innerHTML = s;
-    this_point.push(s)
+    let side = Get_Radio_Values(arr);
 
     //Check the Type radios for the type of shot missed
     arr = ["Serve", "Drive", "Volley", "Lob", "Overhead"];
-    s = Get_Radio_Values(arr);
-    Shot_Type.innerHTML = s;
-    this_point.push(s)
+    let shot_type = Get_Radio_Values(arr);
+    
 
     //Check to see how the shot was missed
     arr = ["None", "Long", "Wide", "Net"];
-    s = Get_Radio_Values(arr);
-    Miss_Place.innerHTML = s;
-    this_point.push(s)
+    let miss_place = Get_Radio_Values(arr);
+    
 
     //Check to see what kind of error it was
     arr = ["Winner", "UE", "FE"];
-    s = Get_Radio_Values(arr);
-    End_Type.innerHTML = s;
-    this_point.push(s)
+    let end_type = Get_Radio_Values(arr);
+    
 
     //Get data from Player Ended radio buttons
     arr = ["Player1", "Player2", "Player3", "Player4"];
-    s = Get_Radio_Values(arr);
-    Ended_By.innerHTML = s;
-    this_point.push(s)
-
-
-    data.push(this_point);
+    let ended_by = Get_Radio_Values(arr);
+    
+    Create_New_Rows(point_count, shot_count, side, shot_type, miss_place, end_type, ended_by);
 
     //increment the point count
     point_count++;
@@ -207,7 +207,10 @@ function downloadCSVFile(csv_data, t_name) {
     var temp_link = document.createElement('a');
 
     //create CSV file's name
-    var file_name = t_name + "_" + document.getElementById("Player1").value + "_" + document.getElementById("Player2").value + ".csv";
+    var file_name = t_name + "_" + document.getElementById("Player1").value + "_"
+     + document.getElementById("Player2").value + "_" 
+     + document.getElementById("Player3").value + "_" + 
+     document.getElementById("Player4").value + ".csv";
 
     // Download csv file
     temp_link.download = file_name;
@@ -222,6 +225,59 @@ function downloadCSVFile(csv_data, t_name) {
     // trigger download
     temp_link.click();
     document.body.removeChild(temp_link);
+}
+
+function Read_In_Match_Data(evt){
+    var files = evt.target.files; // FileList object
+
+    f = files[0];
+
+    // Only process csv files.
+    if (!f.type.match("text/csv")) {
+        alert("We can only read in csv files.");
+        return;
+    }
+
+    var reader = new FileReader();
+
+    // Closure to capture the file information.
+    reader.onload = (function(f) {
+        let filestring = reader.result;
+        Parse_CSV_And_Add_Point(filestring);
+    });
+
+    reader.readAsText(f);
+}
+
+function Parse_CSV_And_Add_Point(filestring){
+    
+    csv_rows = filestring.split('\n');
+    let full_csv = [];
+    let players = [];
+    for(let i=0; i < csv_rows.length; i++){
+        let row_arr = csv_rows[i].split(',')
+        full_csv.unshift(row_arr);
+
+        //look for unique player values to add to the player values
+        if(!players.includes(row_arr[1])){
+            players.push(row_arr[1]);
+        }
+    }
+
+    //update players values
+    if(players.length > 4){
+        alert("Too many player values found. Max of 4 players in a data set");
+        return;
+    }
+    while(players.length < 4  ){
+        players.push("");
+    }
+    //TODO UPDATE THE VALUES HERE AND CONTINUE WRITING THIS METHOD
+
+    //Get all unique values in the Ended_by row (rows 1)
+    
+
+    Create_New_Rows(point_count, shot_count, side, shot_type, miss_place, end_type, ended_by);
 }
 
 //#################################################################

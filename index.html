@@ -226,8 +226,18 @@
                 </div>
                 <div class="col"> <!-- Main column for Statistical analysis-->
                     <h3>Match Analysis</h3>
-                    <button class="btn btn-outline-info mb-3" onclick="TableToCSV('match_analysis')">Save Analysis</button>
-                    <button class="btn btn-outline-info mb-3" onclick="TableToCSV('match_data')">Save Match Data</button>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Save Match Data</h5>
+                            <button class="btn btn-outline-info mb-3" onclick="TableToCSV('match_analysis')">Save Analysis</button>
+                            <button class="btn btn-outline-info mb-3" onclick="TableToCSV('match_data')">Save Match Data</button>
+                        </div>
+
+                        <div class="col">
+                            <h5>Load Match Data</h5>
+                            <input  class="btn btn-outline-secondary mb-3" type="file" id="files" name="file" accept=".csv"/>
+                        </div>
+                    </div>                    
                     <div class="fixTableHead">
                         <table id="match_analysis" class="table">
                             <thead class="thead-light">
@@ -628,5 +638,8 @@
                 </table>
             </div>
         </div>
+        <script>
+            document.getElementById('files').addEventListener('change', Read_In_Match_Data, false);
+        </script>
     </body>
 </html>
