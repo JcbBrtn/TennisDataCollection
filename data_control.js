@@ -386,7 +386,7 @@ function Update_Stats(){
     //Need to do the Total column for Avg, SD, and Shot Tolerance
     document.getElementById("Total_BTB").innerText = total_btb;
 
-    total_mean = Mean(avg_arr);
+    total_mean = Mean(total_sc);
     document.getElementById("Total_ASC").innerText = total_mean.toString().substring(0, 3);
 
     total_std = STD(total_sc, total_mean);
