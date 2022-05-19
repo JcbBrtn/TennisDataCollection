@@ -10,6 +10,11 @@
         rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
         <script src="data_control.js"></script>
+        <script>
+        window.addEventListener('load', (event) => {
+            Reset_Input_Fields();
+        });
+        </script>
         <style>
             .fixTableHead {
                 overflow-y: auto;
@@ -55,7 +60,7 @@
                             <div class="card form-control" style="width: 12rem;"> <!--First card in the row-->
                                 <div class="card-body">
                                     <h6>Shot Count</h6>
-                                    <input class="form-control" type="number" id="Shot_Count" min="1" value="1"/>
+                                    <input class="form-control" type="number" id="Shot_Count" min="1" value="1" onchange="Check_For_Serve()"/>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +102,12 @@
                                 <div class="card-body">
                                     <h6>Side Shot was hit</h6>
                                     <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sideRadio" id="ServeSide_Radio">
+                                        <label class="form-check-label" for="ServeSide_Radio" id="ServeSide_Label">
+                                        Serve
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
                                         <input class="form-check-input" type="radio" name="sideRadio" id="Forehand_Radio">
                                         <label class="form-check-label" for="Forehand_Radio" id="Forehand_Label">
                                         Forehand
@@ -116,7 +127,7 @@
                                 <div class="card-body">
                                     <h6>Shot Type</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="typeRadio" id="Serve_Radio">
+                                        <input class="form-check-input" type="radio" name="typeRadio" id="Serve_Radio" onchange="Check_To_Disable_FE()">
                                         <label class="form-check-label" for="Serve_Radio" id="Serve_Label">
                                         Serve
                                         </label>

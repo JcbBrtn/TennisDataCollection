@@ -5,6 +5,7 @@ Our data is an array of arrays. Each element of the array has an index that is t
 point = [point_count, shot_count, side, shot_type, miss_place, end_type, ended_by]
 */
 
+
 function Update_Player1_Label(){
     var player1 = document.getElementById("Player1");
     var player1_label = document.getElementById("Player1_Label");
@@ -56,6 +57,26 @@ function Toggle_Table(){
     table.classList.toggle("invisible");
 }
 
+function Check_For_Serve(){
+    let truth = Number(document.getElementById("Shot_Count").value) == 1;
+
+    document.getElementById("ServeSide_Radio").checked = truth;
+    document.getElementById("Serve_Radio").checked = truth;
+
+    document.getElementById("ServeSide_Radio").disabled = !truth;
+    document.getElementById("Serve_Radio").disabled = !truth;
+
+    document.getElementById("Forehand_Radio").disabled = false;
+    document.getElementById("Backhand_Radio").disabled = false;
+
+    document.getElementById("Drive_Radio").disabled = truth;
+    document.getElementById("Volley_Radio").disabled = truth;
+    document.getElementById("Lob_Radio").disabled = truth;
+    document.getElementById("Overhead_Radio").disabled = truth;
+    document.getElementById("FE_Radio").disabled = truth;
+
+}
+
 function Reset_Input_Fields(){
     //Reset Shot count
     document.getElementById("Shot_Count").value = 1;
@@ -79,6 +100,8 @@ function Reset_Input_Fields(){
     document.getElementById("Player2_Radio").checked = false;
     document.getElementById("Player3_Radio").checked = false;
     document.getElementById("Player4_Radio").checked = false;
+
+    Check_For_Serve();
 }
 
 function Get_Radio_Values(arr_of_radios){
