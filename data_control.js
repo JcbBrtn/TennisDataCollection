@@ -5,50 +5,19 @@ Our data is an array of arrays. Each element of the array has an index that is t
 point = [point_count, shot_count, side, shot_type, miss_place, end_type, ended_by]
 */
 
+function Update_Player_Label(p_name){
+    var player = document.getElementById(p_name);
+    var player_label = document.getElementById(p_name+"_Label");
 
-function Update_Player1_Label(){
-    var player1 = document.getElementById("Player1");
-    var player1_label = document.getElementById("Player1_Label");
-    player1_label.innerText=player1.value;
-    document.getElementById("Player1_Table").innerText = player1.value;
-}
-
-function Update_Player2_Label(){
-    var player2 = document.getElementById("Player2");
-    var player2_label = document.getElementById("Player2_Label");
-    player2_label.innerText=player2.value;
-    document.getElementById("Player2_Table").innerText = player2.value;
-}
-
-function Update_Player3_Label(){
-    var player3 = document.getElementById("Player3");
-    var player3_label = document.getElementById("Player3_Label");
-
-    if (player3.value === ""){
-        player3_label.innerText = "Player 3";
-        document.getElementById("Player3_Table").innerText = "Player 3";
-        document.getElementById("Player3_Radio").disabled = true;
+    if (player.value === ""){
+        player_label.innerText = p_name;
+        document.getElementById(p_name+"_Table").innerText = p_name;
+        document.getElementById(p_name+"_Radio").disabled = true;
     }
     else{
-        player3_label.innerText=player3.value;
-        document.getElementById("Player3_Table").innerText = player3.value;
-        document.getElementById("Player3_Radio").disabled = false;
-    }
-}
-
-function Update_Player4_Label(){
-    var player4 = document.getElementById("Player4");
-    var player4_label = document.getElementById("Player4_Label");
-
-    if (player4.value === ""){
-        player4_label.innerText = "Player 4";
-        document.getElementById("Player4_Table").innerText = "Player 4";
-        document.getElementById("Player4_Radio").disabled = true;
-    }
-    else{
-        player4_label.innerText=player4.value;
-        document.getElementById("Player4_Radio").disabled = false;
-        document.getElementById("Player4_Table").innerText = player4.value;
+        player_label.innerText=player.value;
+        document.getElementById(p_name+"_Table").innerText = player.value;
+        document.getElementById(p_name+"_Radio").disabled = false;
     }
 }
 
@@ -171,6 +140,8 @@ function Add_Point_Data() {
     s = Get_Radio_Values(arr);
     Ended_By.innerHTML = s;
     this_point.push(s)
+
+
     data.push(this_point);
 
     //increment the point count
@@ -381,18 +352,13 @@ function Update_Stats(){
         for(var f_key in first_letter_column_val_pair){
             for(var s_key in side_col_val_pairs){
                 var stat = f_key + s_key;
+                
                 if(stat != 'FS'){
                     if(i == 0){
                         document.getElementById("Total_"+stat).innerText=0;
                     }
-                    var count = 0
 
-                    if(s_key == 'S'){
-                        count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 3, second_letter_column_val_pair[s_key], 5, first_letter_column_val_pair[f_key]);
-                    }
-                    else{
-                        count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 2, second_letter_column_val_pair[s_key], 5, first_letter_column_val_pair[f_key]);
-                    }
+                    var count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 2, side_col_val_pairs[s_key], 5, first_letter_column_val_pair[f_key]);
 
                     document.getElementById(p + "_" + stat).innerText = count;
 
