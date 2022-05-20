@@ -123,6 +123,9 @@ function Create_New_Rows(p_count, shot_count, side, shot_type, miss_place, end_t
 
 function Add_Point_Data() {
 
+    //Get Shot_Count
+    let shot_count = document.getElementById("Shot_Count").value;
+
     //Check the side radios for forehand or backhand
     arr = ["Forehand", "Backhand"];
     let side = Get_Radio_Values(arr);
@@ -256,11 +259,20 @@ function Parse_CSV_And_Add_Point(filestring){
     let players = [];
     for(let i=0; i < csv_rows.length; i++){
         let row_arr = csv_rows[i].split(',')
-        full_csv.unshift(row_arr);
+        let pc = row_arr[0];
+        let ended_by = row_arr[1];
+        let shot_count = row_arr[2];
+        let side = row_arr[3];
+        let shot_type = row_arr[4];
+        let miss_place = row_arr[5];
+        let end_type = row_arr[6];
+        if(Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by)){
+            full_csv.unshift(row_arr);
 
-        //look for unique player values to add to the player values
-        if(!players.includes(row_arr[1])){
-            players.push(row_arr[1]);
+            //look for unique player values to add to the player values
+            if(!players.includes(row_arr[1])){
+                players.push(row_arr[1]);
+            }
         }
     }
 
@@ -272,12 +284,62 @@ function Parse_CSV_And_Add_Point(filestring){
     while(players.length < 4  ){
         players.push("");
     }
-    //TODO UPDATE THE VALUES HERE AND CONTINUE WRITING THIS METHOD
 
-    //Get all unique values in the Ended_by row (rows 1)
-    
+    for(let i = 0; i < 4; i++){
+        player_elem = document.getElementById("Player"+(i+1)).value = players[i];
+        Update_Player_Label("Player"+(i+1));
+    }
 
-    Create_New_Rows(point_count, shot_count, side, shot_type, miss_place, end_type, ended_by);
+    //Parse through each point and all it using the Create_New_Rows_method
+    for(let i = 0; i < full_csv.length; i++){
+
+        let pc = full_csv[i][0];
+        let ended_by = full_csv[i][1];
+        let shot_count = full_csv[i][2];
+        let side = full_csv[i][3];
+        let shot_type = full_csv[i][4];
+        let miss_place = full_csv[i][5];
+        let end_type = full_csv[i][6]
+        if(Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by)){
+            Create_New_Rows(pc, shot_count, side, shot_type, miss_place, end_type, ended_by);
+        }
+    }
+
+    point_count = full_csv.length + 1;
+
+    //Update the Stats fields
+    Update_Stats();
+}
+
+function Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by){
+    try {
+        if(Number(pc) != pc || Number(shot_count) != shot_count){
+            console.log(pc)
+            console.log(shot_count);
+            return false;
+        }
+        if(!["Forehand", "Backhand", ""].includes(side.trim())){
+            console.log(side);
+            return false;
+        }
+        if (!["Serve", "Drive", "Volley", "Lob", "Overhead"].includes(shot_type.trim())){
+            console.log(shot_type);
+            return false;
+        }
+        if (!["", "Long", "Wide", "Net"].includes(miss_place.trim())){
+            console.log(miss_place);
+            return false;
+        }
+        if (!["Winner", "Unforced Error", "Forced Error"].includes(end_type.trim())){
+            console.log(end_type);
+            return false;
+        }
+
+        return true;
+
+    } catch (ex) {
+        console.log(ex.toString());
+    }
 }
 
 //#################################################################
