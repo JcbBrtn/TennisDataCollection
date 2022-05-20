@@ -318,15 +318,15 @@ function Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ende
             console.log(shot_count);
             return false;
         }
-        if(!["Forehand", "Backhand", ""].includes(side.trim())){
+        if(!["Forehand", "Backhand", "Serve", ""].includes(side.trim())){
             console.log(side);
             return false;
         }
-        if (!["Serve", "Drive", "Volley", "Lob", "Overhead"].includes(shot_type.trim())){
+        if (!["Serve", "Drive", "Volley", "Lob", "Overhead", ""].includes(shot_type.trim())){
             console.log(shot_type);
             return false;
         }
-        if (!["", "Long", "Wide", "Net"].includes(miss_place.trim())){
+        if (!["Winner", "Long", "Wide", "Net", ""].includes(miss_place.trim())){
             console.log(miss_place);
             return false;
         }
@@ -470,8 +470,11 @@ function Update_Stats(){
         
         side_col_val_pairs = {'F': 'Forehand', 'B': 'Backhand', 'S': 'Serve'};
         first_letter_column_val_pair['W'] = 'Winner'
+        second_letter_column_val_pair['S'] = 'Serve';
 
         for(var f_key in first_letter_column_val_pair){
+            let total_f_key_count = 0;
+
             for(var s_key in side_col_val_pairs){
                 var stat = f_key + s_key;
                 
@@ -481,6 +484,12 @@ function Update_Stats(){
                     }
 
                     var count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 2, side_col_val_pairs[s_key], 5, first_letter_column_val_pair[f_key]);
+
+                    if (count == 0){
+                        count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 3, side_col_val_pairs[s_key], 5, first_letter_column_val_pair[f_key]);
+                    }
+
+                    total_f_key_count+= count
 
                     document.getElementById(p + "_" + stat).innerText = count;
 
@@ -497,11 +506,17 @@ function Update_Stats(){
 
                     count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 3, second_letter_column_val_pair[s_key], 5, first_letter_column_val_pair[f_key]);
 
+                    total_f_key_count += count;
+
                     document.getElementById(p + "_" + stat).innerText = count;
 
                     Add_Count_To_Total(stat, count);
                 }
             }
+            document.getElementById(p + "_" + f_key).innerText = total_f_key_count;
+
+            Add_Count_To_Total(f_key, total_f_key_count);
+
         }
     }
 
