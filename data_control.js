@@ -100,25 +100,60 @@ function Create_New_Rows(p_count, shot_count, side, shot_type, miss_place, end_t
     Point_Number.innerHTML = p_count;
     this_point.push(p_count);
 
-    Shot_Count.innerHTML = shot_count;
+    Shot_Count.innerHTML = `<input class="col-xs-2 border-0" type="number" id="Shot_Count_${p_count}" min="1" value="${shot_count}" onchange="Update_Point_Data(${p_count}, 1, 'Shot_Count_${p_count}')"/>`;
     this_point.push(shot_count);
 
-    Side.innerHTML = side;
+    Side.innerHTML = Get_Select_Tag('Side', side, p_count, 2);
     this_point.push(side);
 
-    Shot_Type.innerHTML = shot_type;
+    Shot_Type.innerHTML = Get_Select_Tag('Shot_Type', shot_type, p_count, 3);
     this_point.push(shot_type);
 
-    Miss_Place.innerHTML = miss_place;
+    Miss_Place.innerHTML = Get_Select_Tag('Miss_Place', miss_place, p_count, 4);
     this_point.push(miss_place);
 
-    End_Type.innerHTML = end_type;
+    End_Type.innerHTML = Get_Select_Tag('End_Type', end_type, p_count, 5);
     this_point.push(end_type);
 
-    Ended_By.innerHTML = ended_by;
+    Ended_By.innerHTML = Get_Select_Tag('Ended_By', ended_by, p_count, 6);
     this_point.push(ended_by);
 
     data.push(this_point);
+}
+
+function Get_Select_Tag(key, val, p_count, col){
+    let Card_Key_Val_Pair = {'Side' : ['Serve', 'Forehand', 'Backhand'],
+                        'Shot_Type' : ["Serve", "Drive", "Volley", "Lob", "Overhead"],
+                        'Miss_Place' : ["Winner", "Long", "Wide", "Net"],
+                        'End_Type' : ["Winner", "Unforced Error", "Forced Error"]};
+    
+    //Get the end by selection arr
+    let p_arr = []
+    for(let i = 1; i <= 4; i++){
+        p_val = document.getElementById("Player" + i).value;
+        if(p_val !== ""){
+            p_arr.push(p_val);
+        }
+    }
+    Card_Key_Val_Pair['Ended_By'] = p_arr;
+    
+    let arr = Card_Key_Val_Pair[key];
+    let out_str = `<select class="border-0" id="${key}_${p_count}" style="-moz-appearance: none; -webkit-appearance: none;" onchange="Update_Point_Data(${p_count}, ${col}, '${key}_${p_count}')">`;
+    for(let i = 0; i < arr.length; i++){
+        out_str += `<option value="${arr[i]}"`;
+        if(arr[i] == val){
+            out_str += ` selected`
+        }
+        out_str += `>${arr[i]}</option>`
+    }
+
+    return out_str;
+}
+
+function Update_Point_Data(p_count, col, e_id){
+    data[p_count-1][col] = document.getElementById(e_id).value;
+
+    Update_Stats();
 }
 
 function Add_Point_Data() {
@@ -514,6 +549,10 @@ function Update_Stats(){
                 }
             }
             document.getElementById(p + "_" + f_key).innerText = total_f_key_count;
+
+            if(i == 0){
+                document.getElementById("Total_"+f_key).innerText=0;
+            }
 
             Add_Count_To_Total(f_key, total_f_key_count);
 
