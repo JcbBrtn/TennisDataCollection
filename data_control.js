@@ -39,8 +39,8 @@ function Check_For_Serve(){
     document.getElementById("ServeSide_Radio").disabled = !truth;
     document.getElementById("Serve_Radio").disabled = !truth;
 
-    document.getElementById("Forehand_Radio").disabled = false;
-    document.getElementById("Backhand_Radio").disabled = false;
+    document.getElementById("Forehand_Radio").disabled = truth;
+    document.getElementById("Backhand_Radio").disabled = truth;
 
     document.getElementById("Drive_Radio").disabled = truth;
     document.getElementById("Volley_Radio").disabled = truth;
@@ -152,7 +152,7 @@ function Get_Select_Tag(key, val, p_count, col){
 
 function Update_Point_Data(p_count, col, e_id){
     data[p_count-1][col] = document.getElementById(e_id).value;
-
+    console.log(`p_count : ${p_count}, col : ${col}, ${e_id}`);
     Update_Stats();
 }
 
@@ -202,14 +202,13 @@ function Add_Point_Data() {
 function TableToCSV(t_name) {
  
     // Variable to store the final csv data
-    var csv_data = [];
+    var csv_data = [['Point Number','Shot Count','Side','Shot Type','Miss Place', 'End Type', 'Ended By']];
 
     // Get each row data
-    var rows = document.getElementById(t_name).rows;
-    for (var i = 0; i < rows.length; i++) {
+    for (var i = 0; i < data.length; i++) {
 
         // Get each column data
-        var cols = rows[i].querySelectorAll('td,th');
+        var cols = data[i];
 
         // Stores each csv row data
         var csvrow = [];
@@ -217,7 +216,7 @@ function TableToCSV(t_name) {
 
             // Get the text data of each cell
             // of a row and push it to csvrow
-            csvrow.push(cols[j].innerHTML);
+            csvrow.push(cols[j]);
         }
 
         // Combine each column value with comma
@@ -293,20 +292,20 @@ function Parse_CSV_And_Add_Point(filestring){
     let full_csv = [];
     let players = [];
     for(let i=0; i < csv_rows.length; i++){
-        let row_arr = csv_rows[i].split(',')
+        let row_arr = csv_rows[i].split(',');
         let pc = row_arr[0];
-        let ended_by = row_arr[1];
-        let shot_count = row_arr[2];
-        let side = row_arr[3];
-        let shot_type = row_arr[4];
-        let miss_place = row_arr[5];
-        let end_type = row_arr[6];
+        let shot_count = row_arr[1];
+        let side = row_arr[2];
+        let shot_type = row_arr[3];
+        let miss_place = row_arr[4];
+        let end_type = row_arr[5];
+        let ended_by = row_arr[6];
         if(Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by)){
             full_csv.unshift(row_arr);
 
             //look for unique player values to add to the player values
-            if(!players.includes(row_arr[1])){
-                players.push(row_arr[1]);
+            if(!players.includes(row_arr[6])){
+                players.push(row_arr[6]);
             }
         }
     }
@@ -329,12 +328,12 @@ function Parse_CSV_And_Add_Point(filestring){
     for(let i = 0; i < full_csv.length; i++){
 
         let pc = full_csv[i][0];
-        let ended_by = full_csv[i][1];
-        let shot_count = full_csv[i][2];
-        let side = full_csv[i][3];
-        let shot_type = full_csv[i][4];
-        let miss_place = full_csv[i][5];
-        let end_type = full_csv[i][6]
+        let shot_count = full_csv[i][1];
+        let side = full_csv[i][2];
+        let shot_type = full_csv[i][3];
+        let miss_place = full_csv[i][4];
+        let end_type = full_csv[i][5]
+        let ended_by = full_csv[i][6];
         if(Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by)){
             Create_New_Rows(pc, shot_count, side, shot_type, miss_place, end_type, ended_by);
         }
@@ -349,24 +348,24 @@ function Parse_CSV_And_Add_Point(filestring){
 function Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by){
     try {
         if(Number(pc) != pc || Number(shot_count) != shot_count){
-            console.log(pc)
-            console.log(shot_count);
+            console.log("Point Count :" +  pc)
+            console.log("Shot count : " + shot_count);
             return false;
         }
         if(!["Forehand", "Backhand", "Serve", ""].includes(side.trim())){
-            console.log(side);
+            console.log("Side : " + side);
             return false;
         }
         if (!["Serve", "Drive", "Volley", "Lob", "Overhead", ""].includes(shot_type.trim())){
-            console.log(shot_type);
+            console.log("Shot Type : " + shot_type);
             return false;
         }
         if (!["Winner", "Long", "Wide", "Net", ""].includes(miss_place.trim())){
-            console.log(miss_place);
+            console.log("Miss Place : " + miss_place);
             return false;
         }
         if (!["Winner", "Unforced Error", "Forced Error"].includes(end_type.trim())){
-            console.log(end_type);
+            console.log("End Type : " + end_type);
             return false;
         }
 
