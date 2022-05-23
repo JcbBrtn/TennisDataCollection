@@ -564,8 +564,6 @@ function Update_Stats(){
 
                     count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 3, second_letter_column_val_pair[s_key], 5, first_letter_column_val_pair[f_key]);
 
-                    total_f_key_count += count;
-
                     Insert_Value_Into_Stats(p + "_" + stat, count)
 
                     Add_Count_To_Total(stat, count, i);
