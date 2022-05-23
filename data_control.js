@@ -1,5 +1,6 @@
 let point_count = 1;
 let data = [];
+let is_Per = false;
 /*
 Our data is an array of arrays. Each element of the array has an index that is the point count and follows the following form.
 point = [point_count, shot_count, side, shot_type, miss_place, end_type, ended_by]
@@ -19,6 +20,7 @@ function Update_Player_Label(p_name){
         document.getElementById(p_name+"_Table").innerText = player.value;
         document.getElementById(p_name+"_Radio").disabled = false;
     }
+    
 }
 
 function Select_Radio(e_str){
@@ -28,6 +30,19 @@ function Select_Radio(e_str){
 function Toggle_Table(){
     table = document.getElementById("match_data");
     table.classList.toggle("invisible");
+}
+
+function Toggle_Percents(){
+    if(is_Per){
+        is_Per = false;
+        document.getElementById("Per_Tog_Btn").innerText = "Show Percentage";
+
+    } else {
+        is_Per = true;
+        document.getElementById("Per_Tog_Btn").innerText = "Show Count";
+    }
+
+    Update_Stats();
 }
 
 function Check_For_Serve(){
@@ -152,7 +167,7 @@ function Get_Select_Tag(key, val, p_count, col){
 
 function Update_Point_Data(p_count, col, e_id){
     data[p_count-1][col] = document.getElementById(e_id).value;
-    console.log(`p_count : ${p_count}, col : ${col}, ${e_id}`);
+    //console.log(`p_count : ${p_count}, col : ${col}, ${e_id}`);
     Update_Stats();
 }
 
@@ -300,12 +315,15 @@ function Parse_CSV_And_Add_Point(filestring){
         let miss_place = row_arr[4];
         let end_type = row_arr[5];
         let ended_by = row_arr[6];
+
         if(Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by)){
-            full_csv.unshift(row_arr);
+            ended_by = Clean_Ended_By_Input(ended_by);
+
+            full_csv.push([pc, shot_count, side, shot_type, miss_place, end_type, ended_by]);
 
             //look for unique player values to add to the player values
-            if(!players.includes(row_arr[6])){
-                players.push(row_arr[6]);
+            if(!players.includes(ended_by)){
+                players.push(ended_by);
             }
         }
     }
@@ -334,15 +352,21 @@ function Parse_CSV_And_Add_Point(filestring){
         let miss_place = full_csv[i][4];
         let end_type = full_csv[i][5]
         let ended_by = full_csv[i][6];
-        if(Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by)){
-            Create_New_Rows(pc, shot_count, side, shot_type, miss_place, end_type, ended_by);
-        }
+        Create_New_Rows(pc, shot_count, side, shot_type, miss_place, end_type, ended_by);
     }
 
     point_count = full_csv.length + 1;
 
     //Update the Stats fields
     Update_Stats();
+}
+
+function Clean_Ended_By_Input(ended_by){
+    ended_by = ended_by.replace("\r", "");
+    ended_by = ended_by.replace("\t", "");
+    ended_by = ended_by.replace("\n", "");
+    ended_by = ended_by.trim();
+    return ended_by;
 }
 
 function Valid_Input(pc, shot_count, side, shot_type, miss_place, end_type, ended_by){
@@ -439,13 +463,13 @@ function Update_Stats(){
 
             //reset Total Column to 0 if Player1 is the current player.
             if(i == 0){
-                document.getElementById("Total_"+stat).innerText=0;
+                Reset_Cell("Total_"+stat);
             }
 
             var count = Get_Shot_Count_Stats(check, player_name);
-            document.getElementById(p + "_" + stat).innerText = count;
+            Insert_Value_Into_Stats(p + "_" + stat, count);
 
-            Add_Count_To_Total(stat, count);
+            Add_Count_To_Total(stat, count, i);
         }
 
         //Time to do BTB, avg, sd and shot tolerance
@@ -472,16 +496,16 @@ function Update_Stats(){
             last_shot_count = point[1];
         }
 
-        document.getElementById(p + "_BTB").innerText = btb_count;
+        Insert_Count(p + "_BTB", btb_count);
 
         let mean = Mean(sc_for_player);
         avg_arr.push(mean);
-        document.getElementById(p+"_ASC").innerText = mean.toString().substring(0, 3);
+        Insert_Count(p+"_ASC", mean);
 
         let std = STD(sc_for_player, mean);
-        document.getElementById(p+"_SSC").innerText = std.toString().substring(0, 3)
+        Insert_Count(p+"_SSC", std);
 
-        document.getElementById(p+"_ST").innerText = (mean + std).toString().substring(0, 3);
+        Insert_Count(p+"_ST",mean + std);
 
         //Lets do the 3 letter stat family
         for(var f_key in first_letter_column_val_pair){
@@ -490,14 +514,14 @@ function Update_Stats(){
 
                     var stat = f_key + s_key + t_key;
                     if(i == 0){
-                        document.getElementById("Total_"+stat).innerText=0;
+                        Reset_Cell("Total_"+stat);
                     }
 
                     var count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 3, second_letter_column_val_pair[s_key], 4, third_letter_column_val_pair[t_key]);
 
-                    document.getElementById(p + "_" + stat).innerText = count;
+                    Insert_Value_Into_Stats(p + "_" + stat, count);
 
-                    Add_Count_To_Total(stat, count);
+                    Add_Count_To_Total(stat, count, i);
                 }
             }
         }
@@ -514,7 +538,7 @@ function Update_Stats(){
                 
                 if(stat != 'FS'){
                     if(i == 0){
-                        document.getElementById("Total_"+stat).innerText=0;
+                        Reset_Cell("Total_"+stat);
                     }
 
                     var count = Get_Other_Counts(player_name, 5, first_letter_column_val_pair[f_key], 2, side_col_val_pairs[s_key], 5, first_letter_column_val_pair[f_key]);
@@ -525,16 +549,16 @@ function Update_Stats(){
 
                     total_f_key_count+= count
 
-                    document.getElementById(p + "_" + stat).innerText = count;
+                    Insert_Value_Into_Stats(p + "_" + stat, count)
 
-                    Add_Count_To_Total(stat, count);
+                    Add_Count_To_Total(stat, count, i);
                 }
             }
             if(f_key == 'W'){
                 for(var s_key in second_letter_column_val_pair){
                     var stat = f_key + s_key;
                     if(i == 0){
-                        document.getElementById("Total_"+stat).innerText=0;
+                        Reset_Cell("Total_"+stat);
                     }
                     var count = 0;
 
@@ -542,37 +566,65 @@ function Update_Stats(){
 
                     total_f_key_count += count;
 
-                    document.getElementById(p + "_" + stat).innerText = count;
+                    Insert_Value_Into_Stats(p + "_" + stat, count)
 
-                    Add_Count_To_Total(stat, count);
+                    Add_Count_To_Total(stat, count, i);
                 }
             }
-            document.getElementById(p + "_" + f_key).innerText = total_f_key_count;
+            Insert_Value_Into_Stats(p + "_" + f_key, total_f_key_count)
 
             if(i == 0){
-                document.getElementById("Total_"+f_key).innerText=0;
+                Reset_Cell("Total_"+f_key);
             }
 
-            Add_Count_To_Total(f_key, total_f_key_count);
+            Add_Count_To_Total(f_key, total_f_key_count, i);
 
         }
     }
 
     //Need to do the Total column for Avg, SD, and Shot Tolerance
-    document.getElementById("Total_BTB").innerText = total_btb;
+    Insert_Count("Total_BTB", total_btb);
 
     total_mean = Mean(total_sc);
-    document.getElementById("Total_ASC").innerText = total_mean.toString().substring(0, 3);
+    Insert_Count("Total_ASC", total_mean)
 
     total_std = STD(total_sc, total_mean);
-    document.getElementById("Total_SSC").innerText = total_std.toString().substring(0, 3);
+    Insert_Count("Total_SSC", total_std)
 
-    document.getElementById("Total_ST").innerText = (total_mean + total_std).toString().substring(0, 3);
+    Insert_Count("Total_ST", total_mean + total_std)
 }
 
-function Add_Count_To_Total(property, count){
+function Insert_Value_Into_Stats(cell_id, val){
+    let to_insert = "";
+    if(is_Per){
+        Insert_Percent(cell_id, val);
+    } else {
+        Insert_Count(cell_id, val);
+    }
+}
+
+function Insert_Count(cell_id, val){
+    document.getElementById(cell_id).innerText = val.toString().substring(0, 4);
+}
+
+function Insert_Percent(cell_id,val){
+    document.getElementById(cell_id).innerText = (100 * (val/ point_count)).toString().substring(0, 4) + "%";
+}
+
+function Reset_Cell(cell_id){
+    document.getElementById(cell_id).innerText = 0;
+}
+
+function Add_Count_To_Total(property, count, i){
     total = document.getElementById("Total_" + property).innerText;
-    document.getElementById("Total_" + property).innerText = Number(total) + count;
+    // if(total.slice(-1) == "%"){
+    //     total = total.slice(0, -1);
+    // }
+    if ((i == 3) && is_Per){
+        Insert_Percent("Total_" + property, Number(total) + count);
+    } else {
+        Insert_Count("Total_" + property, Number(total) + count);
+    }
 }
 
 function SCL3(point, player){
