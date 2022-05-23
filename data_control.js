@@ -617,9 +617,9 @@ function Reset_Cell(cell_id){
 
 function Add_Count_To_Total(property, count, i){
     total = document.getElementById("Total_" + property).innerText;
-    // if(total.slice(-1) == "%"){
-    //     total = total.slice(0, -1);
-    // }
+    if(total.slice(-1) == "%"){
+        total = total.slice(0, -1);
+    }
     if ((i == 3) && is_Per){
         Insert_Percent("Total_" + property, Number(total) + count);
     } else {
