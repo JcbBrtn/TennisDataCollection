@@ -6,6 +6,11 @@ Our data is an array of arrays. Each element of the array has an index that is t
 point = [point_count, shot_count, side, shot_type, miss_place, end_type, ended_by]
 */
 
+//#################################################################
+//
+//                      Called by the frontend
+//
+//#################################################################
 function Update_Player_Label(p_name){
     var player = document.getElementById(p_name);
     var player_label = document.getElementById(p_name+"_Label");
@@ -79,6 +84,12 @@ function Reset_Input_Fields(){
 
     Check_For_Serve();
 }
+
+//#################################################
+//
+//               Input Handling
+//
+//#################################################
 
 function Get_Radio_Values(arr_of_radios){
     for (var e of arr_of_radios){
@@ -302,7 +313,7 @@ function Read_In_Match_Data(evt){
 }
 
 function Parse_CSV_And_Add_Point(filestring){
-    
+    data = []
     csv_rows = filestring.split('\n');
     let full_csv = [];
     let players = [];
@@ -446,8 +457,16 @@ function Update_Stats(){
     let avg_arr = [];
     let total_sc = [];
     
+    //Loop through each player and calculate their Statistics.
+    //We are going to use the values given to the columns to calculate the total.
+    //Because of this, we need to remember to clear out the total at the start for Player1.
+    //There are a couple cases (Standard deviation, shot tolerance) where we need to
+    // calculate those totals seperately.
     for(let i =0; i < players.length; i++){
 
+        //The <tr> id's are in the form of '{Player}_{Letter combo}'
+        //The letter's possiblities are described in the following dictionaries with their values.
+        //There are some special cases, Shot Count Family, and Winner's Family that will be calculated as well.
         let first_letter_column_val_pair = {'U': 'Unforced Error', 'F': 'Forced Error'}; //column number 5
         let second_letter_column_val_pair = {'D': "Drive", 'V': 'Volley', 'L': 'Lob', 'O': 'Overhead'}; //column number 3
         let third_letter_column_val_pair = {'N':'Net', 'L': 'Long', 'W': 'Wide'}; //column number 4
@@ -486,6 +505,9 @@ function Update_Stats(){
                 }
             }
 
+            //This is calculating the Total Btb SC >= 10.
+            //We only do this for player4 since doing it for
+            //Each player would result in the true total * 4.
             if(p == "Player4"){
                 if(point[1] >= 10 && last_shot_count >= 10){
                     total_btb++;
@@ -526,9 +548,10 @@ function Update_Stats(){
             }
         }
         
+        //Create new Dictionaries for the sides so we can calculate UF, FF, UB, FB
         side_col_val_pairs = {'F': 'Forehand', 'B': 'Backhand', 'S': 'Serve'};
-        first_letter_column_val_pair['W'] = 'Winner'
-        second_letter_column_val_pair['S'] = 'Serve';
+        first_letter_column_val_pair['W'] = 'Winner' //Add in winners to calculate the winner family
+        second_letter_column_val_pair['S'] = 'Serve'; //For redundancy, we will be looking for Serve in either place
 
         for(var f_key in first_letter_column_val_pair){
             let total_f_key_count = 0;
@@ -606,7 +629,7 @@ function Insert_Count(cell_id, val){
 }
 
 function Insert_Percent(cell_id,val){
-    document.getElementById(cell_id).innerText = (100 * (val/ point_count)).toString().substring(0, 4) + "%";
+    document.getElementById(cell_id).innerText = (100 * (val/ point_count)).toFixed(2).toString() + "%";
 }
 
 function Reset_Cell(cell_id){
