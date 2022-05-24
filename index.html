@@ -24,31 +24,31 @@
                 position: sticky;
                 top: 0;
             }
+
+            select:hover{
+                background-color: rgb(220, 220, 220);
+            }
         </style>
     </head>
     <body>
         <div class="container mt-3">
             <h3>Please Enter Each Player's Name.</h3>
             <div class="row mb-3">
-                <div class="col-xs-3 mb-2">
-                    <h6>Team 1</h6>
+                <div class="col-md-3 mb-2">
+                    <input type="text" id="Player1" placeholder="Player 1" onchange="Update_Player_Label('Player1')"/>
                 </div>
-                <div class="col-sm-3 mb-2">
-                    <input type="text" id="Player1" placeholder="Player 1" onblur="Update_Player1_Label()"/>
-                </div>
-                <div class="col-sm-3">
-                    <input type="text" id="Player2" placeholder="Player 2" onblur="Update_Player2_Label()"/>
+                <div class="col-1"></div>
+                <div class="col-md-3">
+                    <input type="text" id="Player2" placeholder="Player 2" onchange="Update_Player_Label('Player2')"/>
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-xs-3 mb-2">
-                    <h6>Team 2</h6>
+                <div class="col-md-3 mb-2">
+                    <input type="text" id="Player3" placeholder="Player 3" onchange="Update_Player_Label('Player3')"/>
                 </div>
-                <div class="col-sm-3 mb-2">
-                    <input type="text" id="Player3" placeholder="Player 3" onblur="Update_Player3_Label()"/>
-                </div>
-                <div class="col-sm-3">
-                    <input type="text" id="Player4" placeholder="Player 4" onblur="Update_Player4_Label()"/>
+                <div class="col-1"></div>
+                <div class="col-md-3">
+                    <input type="text" id="Player4" placeholder="Player 4" onchange="Update_Player_Label('Player4')"/>
                 </div>
             </div>
             <hr>
@@ -69,7 +69,7 @@
                                 <div class="card-body">
                                     <h6>Point Ended By</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio">
+                                        <input class="form-check-input" type="radio" name="flexRadio" id="Player1_Radio" onfocus="Select_Radio('Player1_Radio')">
                                         <label class="form-check-label" for="Player1_Radio" id="Player1_Label">
                                         Player 1
                                         </label>
@@ -108,7 +108,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sideRadio" id="Forehand_Radio">
+                                        <input class="form-check-input" type="radio" name="sideRadio" id="Forehand_Radio" onfocus="Select_Radio('Forehand_Radio')">
                                         <label class="form-check-label" for="Forehand_Radio" id="Forehand_Label">
                                         Forehand
                                         </label>
@@ -133,7 +133,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="typeRadio" id="Drive_Radio">
+                                        <input class="form-check-input" type="radio" name="typeRadio" id="Drive_Radio" onfocus="Select_Radio('Drive_Radio')">
                                         <label class="form-check-label" for="Drive_Radio" id="Drive_Label">
                                         Drive
                                         </label>
@@ -166,9 +166,9 @@
                                 <div class="card-body">
                                     <h6>How the shot missed</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="howRadio" id="None_Radio">
+                                        <input class="form-check-input" type="radio" name="howRadio" id="None_Radio" onfocus="Select_Radio('None_Radio')">
                                         <label class="form-check-label" for="None_Radio" id="None_Label">
-                                        None
+                                        Winner
                                         </label>
                                     </div>
                                     <div class="form-check">
@@ -197,7 +197,7 @@
                                 <div class="card-body">
                                     <h6>How the point ended</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="kindRadio" id="Winner_Radio">
+                                        <input class="form-check-input" type="radio" name="kindRadio" id="Winner_Radio" onfocus="Select_Radio('Winner_Radio')">
                                         <label class="form-check-label" for="Winner_Radio" id="Winner_Label">
                                         Winner
                                         </label>
@@ -226,8 +226,22 @@
                 </div>
                 <div class="col"> <!-- Main column for Statistical analysis-->
                     <h3>Match Analysis</h3>
-                    <button class="btn btn-outline-info mb-3" onclick="TableToCSV('match_analysis')">Save Analysis</button>
-                    <button class="btn btn-outline-info mb-3" onclick="TableToCSV('match_data')">Save Match Data</button>
+                    <div class="row">
+                        <div class="col">
+                            <h5>Save Match Data</h5>
+                            <button class="btn btn-outline-info mb-3" onclick="TableToCSV('match_data')">Save Match Data</button>
+                        </div>
+
+                        <div class="col">
+                            <h5>Load Match Data</h5>
+                            <input  class="btn btn-outline-secondary mb-3" type="file" id="files" name="file" accept=".csv"/>
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <div class="col">
+                            <btn id = "Per_Tog_Btn" class="btn btn-outline-secondary mb-3" onclick="Toggle_Percents()">Show Percentage</btn>
+                        </div>
+                    </div>                  
                     <div class="fixTableHead">
                         <table id="match_analysis" class="table">
                             <thead class="thead-light">
@@ -290,7 +304,7 @@
                                     <td id="Total_ASC"></td>
                                 </tr>
                                 <tr>
-                                    <td>Standard Deviation Shot Count</td>
+                                    <td>Deviation of Shot Count</td>
                                     <td id="Player1_SSC"></td>
                                     <td id="Player2_SSC"></td>
                                     <td id="Player3_SSC"></td>
@@ -307,6 +321,11 @@
                                 </tr>
                                 <tr>
                                     <td><b>Unforced Errors<b></td>
+                                    <td id="Player1_U"></td>
+                                    <td id="Player2_U"></td>
+                                    <td id="Player3_U"></td>
+                                    <td id="Player4_U"></td>
+                                    <td id="Total_U"></td>
                                 </tr>
                                 <tr>
                                     <td>Forehand</td>
@@ -325,7 +344,7 @@
                                     <td id="Total_UB"></td>
                                 </tr>
                                 <tr>
-                                    <td>Serves</td>
+                                    <td>Service Fault</td>
                                     <td id="Player1_US"></td>
                                     <td id="Player2_US"></td>
                                     <td id="Player3_US"></td>
@@ -430,6 +449,11 @@
                                 </tr>
                                 <tr>
                                     <td><b>Forced Errors<b></td>
+                                    <td id="Player1_F"></td>
+                                    <td id="Player2_F"></td>
+                                    <td id="Player3_F"></td>
+                                    <td id="Player4_F"></td>
+                                    <td id="Total_F"></td>
                                 </tr>
                                 <tr>
                                     <td>Forehand</td>
@@ -545,6 +569,11 @@
                                 </tr>
                                 <tr>
                                     <td><b>Winners<b></td>
+                                    <td id="Player1_W"></td>
+                                    <td id="Player2_W"></td>
+                                    <td id="Player3_W"></td>
+                                    <td id="Player4_W"></td>
+                                    <td id="Total_W"></td>
                                 </tr>
                                 <tr>
                                     <td>Forehand</td>
@@ -563,7 +592,7 @@
                                     <td id="Total_WB"></td>
                                 </tr>
                                 <tr>
-                                    <td>Serves</td>
+                                    <td>Aces</td>
                                     <td id="Player1_WS"></td>
                                     <td id="Player2_WS"></td>
                                     <td id="Player3_WS"></td>
@@ -628,5 +657,8 @@
                 </table>
             </div>
         </div>
+        <script>
+            document.getElementById('files').addEventListener('change', Read_In_Match_Data, false);
+        </script>
     </body>
 </html>
